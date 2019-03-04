@@ -29,7 +29,7 @@ namespace Kore
 
         public bool Accept(int layer)
         {
-            return (acceptLayer.value & (1 << layer)) != 0;
+            return acceptLayer.Contains(layer);
         }
     }
 }
