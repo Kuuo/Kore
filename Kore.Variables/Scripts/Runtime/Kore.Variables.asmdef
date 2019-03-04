@@ -1,0 +1,16 @@
+{
+    "name": "Kore.Variables",
+    "references": [
+        "Kore",
+        "Kore.Events",
+        "Kore.Conditions"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
