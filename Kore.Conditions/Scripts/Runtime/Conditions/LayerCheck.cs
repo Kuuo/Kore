@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kore
+namespace Kore.Conditions
 {
     [CreateAssetMenu(menuName = "Kore/ConditionCheck/LayerCheck")]
     public class LayerCheck : ScriptableObject

@@ -1,8 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Kore;
+using Kore.Variables;
 
-namespace KoreEditor
+namespace KoreEditor.Variables
 {
     [CustomPropertyDrawer(typeof(IntReference))]
     public class IntReferenceDrawer : PropertyDrawer

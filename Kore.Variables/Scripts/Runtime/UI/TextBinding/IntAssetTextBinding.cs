@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kore.UI
+namespace Kore.Variables.UI
 {
     [AddComponentMenu("Kore/UI/TextBinding/IntAssetTextBinding")]
     public class IntAssetTextBinding : ValueAssetTextBinding<int>

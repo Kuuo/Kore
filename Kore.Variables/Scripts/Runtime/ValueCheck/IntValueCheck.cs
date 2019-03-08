@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Kore.Conditions;
 
-namespace Kore
+namespace Kore.Variables
 {
     [CreateAssetMenu(menuName = "Kore/ConditionCheck/ValueCheck/Int")]
     public class IntValueCheck : ConditionCheck

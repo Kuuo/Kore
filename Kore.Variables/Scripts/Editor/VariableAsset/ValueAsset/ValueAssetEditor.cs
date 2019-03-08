@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Kore;
+using Kore.Variables;
 using Kore.Events;
 
-namespace KoreEditor
+namespace KoreEditor.Variables
 {
     public abstract class ValueAssetEditor<TValue, TAsset, TGameEvent> : Editor
         where TValue : struct

@@ -1,5 +1,5 @@
 ﻿
-namespace Kore
+namespace Kore.Variables
 {
     [System.Serializable]
     public class IntReference

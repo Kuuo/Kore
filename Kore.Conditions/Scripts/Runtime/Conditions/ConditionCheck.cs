@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kore
+namespace Kore.Conditions
 {
     public abstract class ConditionCheck : ScriptableObject
     {

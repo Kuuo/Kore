@@ -1,4 +1,6 @@
-﻿namespace Kore.UI
+﻿using Kore.UI;
+
+namespace Kore.Variables.UI
 {
     public abstract class ValueAssetTextBinding<TValue> : TextBinding
         where TValue : struct

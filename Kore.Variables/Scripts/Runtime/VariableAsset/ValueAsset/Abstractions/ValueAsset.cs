@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Kore
+namespace Kore.Variables
 {
     public abstract class ValueAsset : ScriptableObject
     {
-    } 
+    }
 }

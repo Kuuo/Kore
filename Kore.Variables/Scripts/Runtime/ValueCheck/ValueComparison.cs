@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kore
+namespace Kore.Variables
 {
     public enum ValueComparison
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Kore.Events;
 
-namespace Kore
+namespace Kore.Variables
 {
     public abstract class ValueAsset<T> : ValueAsset
         where T : struct

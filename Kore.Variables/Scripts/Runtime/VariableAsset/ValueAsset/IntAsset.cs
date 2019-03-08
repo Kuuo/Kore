@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Kore.Events;
 
-namespace Kore
+namespace Kore.Variables
 {
     [CreateAssetMenu(menuName = "Kore/VariableAsset/Value/Int")]
     public class IntAsset : ValueAsset<int>

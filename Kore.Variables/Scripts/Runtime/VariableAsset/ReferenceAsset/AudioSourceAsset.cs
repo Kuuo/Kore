@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kore
+namespace Kore.Variables
 {
     [CreateAssetMenu(menuName = "Kore/VariableAsset/Reference/AudioSource")]
     public class AudioSourceAsset : ReferenceAsset<AudioSource>
