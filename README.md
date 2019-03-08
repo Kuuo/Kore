@@ -1,5 +1,5 @@
 # Kore
-A common library, framework for Unity.
+A Unity common library, framework.
 
 ## TODO
 
@@ -7,4 +7,5 @@ A common library, framework for Unity.
 2. Scene Loader
 3. Schedulable Task
    - Timer
-
+4. Threshold Values
+5. Unity RichText Utils
