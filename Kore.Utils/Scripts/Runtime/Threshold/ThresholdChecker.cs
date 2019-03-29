@@ -8,7 +8,9 @@ namespace Kore.Utils
     public abstract class ThresholdChecker<T> : MonoBehaviour
         where T : struct, IComparable<T>
     {
-        protected abstract Threshold<T>[] thresholds { get; }
+        [SerializeField] protected bool shouldCheckAll;
+
+        protected abstract Threshold<T>[] thresholds { get; set; }
 
         protected abstract UnityEvent<T> onValueChanged { get; }
 
@@ -25,20 +27,29 @@ namespace Kore.Utils
         }
 
 
-        // TODO: Do we have to check each threshold?
         public void Check(T newValue)
         {
+            bool checkSuccess = false;
             foreach (var t in thresholds)
             {
-                t.Check(newValue);
+                checkSuccess = t.Check(newValue);
+                if (!shouldCheckAll && checkSuccess)
+                {
+                    return;
+                }
             }
         }
 
 
-        // TODO: This should be in-Editor context menu only
+#if UNITY_EDITOR
+        // TODO: Make a CustomEditor
+        /// Method ThresholdChecker`1.SortThresholds cannot be used for menu commands because class ThresholdChecker`1 is an open generic type.
+        // [UnityEditor.MenuItem("Sort Thresholds")]
         protected void SortThresholds()
         {
-            Array.Sort(thresholds);
+            thresholds = thresholds.OrderBy(m => m.Value).ToArray();
+            // Array.Sort(thresholds);
         }
     }
+#endif
 }

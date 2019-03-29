@@ -11,8 +11,12 @@ namespace Kore.Utils
 
         public IntUnityEvent OnValueChanged;
 
-        protected override Threshold<int>[] thresholds => Thresholds;
+        protected override Threshold<int>[] thresholds
+        {
+            get { return Thresholds; }
+            set { Thresholds = value as IntThreshold[]; }
+        }
 
-        protected override UnityEvent<int> onValueChanged => onValueChanged;
+        protected override UnityEvent<int> onValueChanged => OnValueChanged;
     }
 }
