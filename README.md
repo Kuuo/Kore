@@ -3,7 +3,7 @@ A Unity common library, framework.
 
 ## TODO
 
-1. Simple Debuger
+1. Simple Logger
 2. Scene Loader
 3. Schedulable Task
    - Timer

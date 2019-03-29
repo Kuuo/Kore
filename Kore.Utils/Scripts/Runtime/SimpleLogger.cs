@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Kore/Util/SimpleLogger")]
+[CreateAssetMenu(menuName = "Kore/Utils/SimpleLogger")]
 public class SimpleLogger : ScriptableObject
 {
     private static ILogger logger = Debug.unityLogger;
