@@ -1,25 +1,32 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace Kore.Events
 {
     [CreateAssetMenu(menuName = "Kore/GameEvent/GameEvent")]
     public class GameEvent : ScriptableObject
     {
-        protected event System.Action OnEventRaise;
+        protected List<GameEventListener> listeners = new List<GameEventListener>();
 
         public void Raise()
         {
-            OnEventRaise?.Invoke();
+            listeners.ForEach(l => l.Response());
         }
 
-        public void AddListener(System.Action listener)
+        public void AddListener(GameEventListener listener)
         {
-            OnEventRaise += listener;
+            if (!listeners.Contains(listener))
+            {
+                listeners.Add(listener);
+            }
         }
 
-        public void RemoveListener(System.Action listener)
+        public void RemoveListener(GameEventListener listener)
         {
-            OnEventRaise -= listener;
+            if (listeners.Contains(listener))
+            {
+                listeners.Remove(listener);
+            }
         }
     }
 }

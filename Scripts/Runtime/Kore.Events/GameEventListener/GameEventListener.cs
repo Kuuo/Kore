@@ -11,12 +11,12 @@ namespace Kore.Events
 
         private void OnEnable()
         {
-            listeningEvent.AddListener(Response);
+            listeningEvent.AddListener(this);
         }
 
         private void OnDisable()
         {
-            listeningEvent.RemoveListener(Response);
+            listeningEvent.RemoveListener(this);
         }
 
         public void Response()
