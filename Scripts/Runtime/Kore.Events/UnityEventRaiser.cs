@@ -19,7 +19,7 @@ namespace Kore.Events
         }
 
 #if UNITY_EDITOR
-        [ContextMenu("Test Invoke")]
+        [ContextMenu("Raise Event")]
         private void InvokeTest()
         {
             Event.Invoke();

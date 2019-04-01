@@ -10,7 +10,7 @@ namespace Kore.Utils
     {
         [SerializeField] protected bool shouldCheckAll;
 
-        protected abstract Threshold<T>[] thresholds { get; set; }
+        protected abstract Threshold<T>[] thresholds { get; }
 
         protected abstract UnityEvent<T> onValueChanged { get; }
 
@@ -42,13 +42,10 @@ namespace Kore.Utils
 
 
 #if UNITY_EDITOR
-        // TODO: Make a CustomEditor
-        /// Method ThresholdChecker`1.SortThresholds cannot be used for menu commands because class ThresholdChecker`1 is an open generic type.
-        // [UnityEditor.MenuItem("Sort Thresholds")]
+        [ContextMenu("Sort Thresholds")]
         protected void SortThresholds()
         {
-            thresholds = thresholds.OrderBy(m => m.Value).ToArray();
-            // Array.Sort(thresholds);
+            Array.Sort(thresholds);
         }
     }
 #endif
