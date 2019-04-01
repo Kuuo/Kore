@@ -13,14 +13,14 @@ namespace Kore.Events
             Event.Invoke();
         }
 
-        public void DelayedRaise(float delay)
+        public virtual void DelayedRaise(float delay)
         {
             Invoke(nameof(UnityEventRaiser.Raise), delay);
         }
 
 #if UNITY_EDITOR
         [ContextMenu("Test Invoke")]
-        public void InvokeTest()
+        private void InvokeTest()
         {
             Event.Invoke();
         }
