@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using Kore.Events;
 
-namespace Kore.Utils
+namespace Kore.Variables
 {
-    [AddComponentMenu("Kore/Utils/Threshold/IntThresholdChecker")]
+    [AddComponentMenu("Kore/Variables/Threshold/IntThresholdChecker")]
     public class IntThresholdChecker : ThresholdChecker<int>
     {
         public IntThreshold[] Thresholds;

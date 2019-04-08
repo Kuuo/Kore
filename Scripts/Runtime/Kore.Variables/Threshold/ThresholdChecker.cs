@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Kore.Utils
+namespace Kore.Variables
 {
     public abstract class ThresholdChecker<T> : MonoBehaviour
         where T : struct, IComparable<T>

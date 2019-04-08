@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Kore.Utils
+namespace Kore.Variables
 {
     [Serializable]
     public class Threshold<T> : IComparable<Threshold<T>>

@@ -1,11 +1,40 @@
 # Kore
 A Unity common library, framework.
 
+## Features
+- Kore
+  - LayerMaskExtension
+- Kore.Conditions
+  - LayerCheck
+- Kore.Events
+  - GameEvents & GameEventListeners
+  - Monobehaviour Events
+    - Almost all MonoBehaviour message events
+    - MonoBehaviourEventTrigger
+  - UnityEventRaiser
+  - ConditionalEvent
+- Kore.UI
+  - Abstract TextBinding
+- Kore.Utils
+  - GameObjectUtils
+    - Activator
+    - Destroyer
+  - GizmoDrawers
+  - Screenshoter
+  - SimpleKeyboardEvent
+  - SimpleLogger
+  - UriOpener
+- Kore.Variables
+  - ValueAssets
+    - ValueCheck
+    - ValueAssetsTextBinding
+  - ReferenceAssets
+  - ThresholdValue
+
 ## TODO
 
-1. Simple Logger
-2. Scene Loader
-3. Schedulable Task
+- Scene Loader
+- Schedulable Task
    - Timer
-4. Threshold Values
-5. Unity RichText Utils
+- Threshold Values
+- Unity RichText Utils
