@@ -6,22 +6,20 @@ namespace Kore.Utils
     {
         public Color color = Color.grey;
 
-        protected virtual bool setMatrix { get; set; } = true;
-
         private void OnDrawGizmosSelected()
         {
             Color preColor = Gizmos.color;
             Gizmos.color = color;
 
             Matrix4x4 preMatrix = Gizmos.matrix;
-            if (setMatrix)
+            if (UseTransformMatrix())
             {
                 Gizmos.matrix = transform.localToWorldMatrix;
             }
 
             Draw();
 
-            if (setMatrix)
+            if (UseTransformMatrix())
             {
                 Gizmos.color = preColor;
                 Gizmos.matrix = preMatrix;
@@ -29,5 +27,7 @@ namespace Kore.Utils
         }
 
         protected abstract void Draw();
+
+        protected virtual bool UseTransformMatrix() => true;
     }
 }

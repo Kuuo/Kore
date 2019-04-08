@@ -7,7 +7,7 @@ namespace Kore.Utils
     {
         public Vector3 direction = Vector3.one;
 
-        protected override bool setMatrix { get; set; } = false;
+        protected override bool UseTransformMatrix() => false;
 
         protected override void Draw()
         {

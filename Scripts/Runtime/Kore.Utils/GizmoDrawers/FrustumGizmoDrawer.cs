@@ -2,7 +2,7 @@
 
 namespace Kore.Utils
 {
-    [AddComponentMenu("Kore/Utils/GizmoDrawer/FrustumGizmoDrawer")]
+    [AddComponentMenu("Kore/Utils/GizmoDrawers/FrustumGizmoDrawer")]
     public class FrustumGizmoDrawer : GizmoDrawer
     {
         public float fov = 60f;

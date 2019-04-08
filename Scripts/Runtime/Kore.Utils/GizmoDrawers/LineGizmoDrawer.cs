@@ -7,7 +7,7 @@ namespace Kore.Utils
     {
         public Transform lineEnd;
 
-        protected override bool setMatrix { get; set; } = false;
+        protected override bool UseTransformMatrix() => false;
 
         protected override void Draw()
         {

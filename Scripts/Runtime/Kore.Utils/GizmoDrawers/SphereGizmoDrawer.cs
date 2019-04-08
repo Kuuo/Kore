@@ -8,7 +8,7 @@ namespace Kore.Utils
         public float radius = 1f;
         public bool solidMode;
 
-        protected override bool setMatrix { get; set; } = false;
+        protected override bool UseTransformMatrix() => false;
 
         protected override void Draw()
         {

@@ -9,7 +9,7 @@ namespace Kore.Utils
         public Vector3 scale = Vector3.one;
         public bool solidMode;
 
-        protected override bool setMatrix { get; set; } = false;
+        protected override bool UseTransformMatrix() => false;
 
         protected override void Draw()
         {

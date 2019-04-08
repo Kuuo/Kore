@@ -10,6 +10,8 @@ namespace Kore.Utils
         private static ILogger logger = Debug.unityLogger;
 
         public LogType logType = LogType.Log;
+
+        [TextArea]
         public string tag = "<color=grey>SimpleLogger</color>";
 
 
