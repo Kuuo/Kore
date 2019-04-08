@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace KoreEditor
+namespace Kore.Editor.Variables
 {
     public class VariableAssetWindow : EditorWindow
     {
@@ -59,7 +59,7 @@ namespace KoreEditor
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
 
-            selectedAssetType = (AssetType)GUILayout.Toolbar((int)selectedAssetType, 
+            selectedAssetType = (AssetType)GUILayout.Toolbar((int)selectedAssetType,
                 Styles.toolbarContent, Styles.toolbarStyle, GUI.ToolbarButtonSize.FitToContents);
 
             GUILayout.FlexibleSpace();

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using Kore.Events;
 
-namespace KoreEditor.Events
+namespace Kore.Editor.Events
 {
     [CustomEditor(typeof(MonoBehaviourEventTrigger))]
-    public class MonoBehaviourEventTriggerEditor : Editor
+    public class MonoBehaviourEventTriggerEditor : UnityEditor.Editor
     {
         private SerializedProperty delegatesProp;
         private GUIContent iconToolbarMinus;

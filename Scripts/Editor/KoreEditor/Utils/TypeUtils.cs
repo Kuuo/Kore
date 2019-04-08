@@ -5,7 +5,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 
-namespace KoreEditor
+namespace Kore.Editor.Utils
 {
     public static class TypeUtils
     {

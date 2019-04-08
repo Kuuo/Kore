@@ -2,10 +2,10 @@
 using UnityEditor;
 using Kore.Events;
 
-namespace KoreEditor.Events
+namespace Kore.Editor.Events
 {
     [CustomEditor(typeof(ConditionalEvent))]
-    public class ConditionalEventEditor : Editor
+    public class ConditionalEventEditor : UnityEditor.Editor
     {
         private SerializedProperty conditionalActionsProp;
 

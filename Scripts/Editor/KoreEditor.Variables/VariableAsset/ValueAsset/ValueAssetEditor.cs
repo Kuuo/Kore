@@ -3,9 +3,9 @@ using UnityEngine;
 using Kore.Variables;
 using Kore.Events;
 
-namespace KoreEditor.Variables
+namespace Kore.Editor.Variables
 {
-    public abstract class ValueAssetEditor<TValue, TAsset, TGameEvent> : Editor
+    public abstract class ValueAssetEditor<TValue, TAsset, TGameEvent> : UnityEditor.Editor
         where TValue : struct
         where TAsset : ValueAsset<TValue>
         where TGameEvent : GameEvent<TValue>

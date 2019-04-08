@@ -2,7 +2,7 @@
 using UnityEditor;
 using Kore;
 
-namespace KoreEditor
+namespace Kore.Editor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(RangeVector2Attribute))]
     public class RangeVector2Drawer : PropertyDrawer

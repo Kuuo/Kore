@@ -2,7 +2,7 @@
 using Kore.Variables;
 using Kore.Events;
 
-namespace KoreEditor.Variables
+namespace Kore.Editor.Variables
 {
     [CustomEditor(typeof(IntAsset))]
     public class IntAssetEditor : ValueAssetEditor<int, IntAsset, IntGameEvent>
