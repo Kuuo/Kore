@@ -12,11 +12,11 @@ namespace Kore.Utils
         {
             if (solidMode)
             {
-                Gizmos.DrawCube(transform.position, scale);
+                Gizmos.DrawCube(Vector3.zero, scale);
             }
             else
             {
-                Gizmos.DrawWireCube(transform.position, scale);
+                Gizmos.DrawWireCube(Vector3.zero, scale);
             }
         }
     }

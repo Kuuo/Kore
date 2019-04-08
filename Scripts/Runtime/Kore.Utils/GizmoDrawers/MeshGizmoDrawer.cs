@@ -9,15 +9,17 @@ namespace Kore.Utils
         public Vector3 scale = Vector3.one;
         public bool solidMode;
 
+        protected override bool setMatrix { get; set; } = false;
+
         protected override void Draw()
         {
             if (solidMode)
             {
-                Gizmos.DrawMesh(mesh, transform.position, Quaternion.identity, scale);
+                Gizmos.DrawMesh(mesh, transform.position, transform.rotation, scale);
             }
             else
             {
-                Gizmos.DrawWireMesh(mesh, transform.position, Quaternion.identity, scale);
+                Gizmos.DrawWireMesh(mesh, transform.position, transform.rotation, scale);
             }
         }
     }

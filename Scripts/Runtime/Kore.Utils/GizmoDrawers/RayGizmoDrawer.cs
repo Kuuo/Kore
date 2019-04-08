@@ -7,6 +7,8 @@ namespace Kore.Utils
     {
         public Vector3 direction = Vector3.one;
 
+        protected override bool setMatrix { get; set; } = false;
+
         protected override void Draw()
         {
             Gizmos.DrawRay(transform.position, direction);

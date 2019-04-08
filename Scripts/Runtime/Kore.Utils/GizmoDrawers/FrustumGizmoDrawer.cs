@@ -12,7 +12,7 @@ namespace Kore.Utils
 
         protected override void Draw()
         {
-            Gizmos.DrawFrustum(transform.position, fov, maxRange, minRange, aspect);
+            Gizmos.DrawFrustum(Vector3.zero, fov, maxRange, minRange, aspect);
         }
     }
 }
