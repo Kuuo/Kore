@@ -8,6 +8,12 @@ namespace Kore.Variables
     public class Threshold<T> : IComparable<Threshold<T>>
         where T : struct, IComparable<T>
     {
+        protected enum ValueChangeState
+        {
+            Ascended, Reached, Descended
+        }
+
+
         [SerializeField] protected T value;
         [SerializeField] private UnityEvent onAscended = new UnityEvent();
         [SerializeField] private UnityEvent onReached = new UnityEvent();
@@ -15,32 +21,28 @@ namespace Kore.Variables
 
         public T Value => value;
 
-        private bool hasAscended;
-        private bool hasDescended;
+        private ValueChangeState valueChangeState;
 
         public bool Check(T newValue)
         {
             int compare = newValue.CompareTo(value);
 
-            if (compare == 0 && (hasAscended || hasDescended))
+            if (compare == 0 && valueChangeState != ValueChangeState.Reached)
             {
                 onReached.Invoke();
-                hasAscended = false;
-                hasDescended = false;
+                valueChangeState = ValueChangeState.Reached;
                 return true;
             }
-            else if (!hasAscended && compare > 0)
+            else if (compare > 0 && valueChangeState != ValueChangeState.Ascended)
             {
                 onAscended.Invoke();
-                hasAscended = true;
-                hasDescended = false;
+                valueChangeState = ValueChangeState.Ascended;
                 return true;
             }
-            else if (!hasDescended && compare < 0)
+            else if (compare < 0 && valueChangeState != ValueChangeState.Descended)
             {
                 onDescended.Invoke();
-                hasAscended = false;
-                hasDescended = true;
+                valueChangeState = ValueChangeState.Descended;
                 return true;
             }
 

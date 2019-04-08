@@ -5,32 +5,16 @@ using UnityEngine.Events;
 
 namespace Kore.Variables
 {
-    public abstract class ThresholdChecker<T> : MonoBehaviour
-        where T : struct, IComparable<T>
+    public abstract class ThresholdChecker<T> where T : struct, IComparable<T>
     {
         [SerializeField] protected bool shouldCheckAll;
 
-        protected abstract Threshold<T>[] thresholds { get; }
-
-        protected abstract UnityEvent<T> onValueChanged { get; }
-
-
-        protected void OnEnable()
-        {
-            onValueChanged.AddListener(Check);
-        }
-
-
-        protected void OnDisable()
-        {
-            onValueChanged.RemoveListener(Check);
-        }
-
+        protected abstract Threshold<T>[] Thresholds { get; }
 
         public void Check(T newValue)
         {
             bool checkSuccess = false;
-            foreach (var t in thresholds)
+            foreach (var t in Thresholds)
             {
                 checkSuccess = t.Check(newValue);
                 if (!shouldCheckAll && checkSuccess)
@@ -45,7 +29,7 @@ namespace Kore.Variables
         [ContextMenu("Sort Thresholds")]
         protected void SortThresholds()
         {
-            Array.Sort(thresholds);
+            Array.Sort(Thresholds);
         }
     }
 #endif
