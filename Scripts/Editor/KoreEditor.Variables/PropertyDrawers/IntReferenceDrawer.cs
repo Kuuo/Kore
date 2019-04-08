@@ -4,7 +4,7 @@ using Kore.Variables;
 
 namespace Kore.Editor.Variables
 {
-    [CustomPropertyDrawer(typeof(IntReference))]
+    // [CustomPropertyDrawer(typeof(IntReference))]
     public class IntReferenceDrawer : PropertyDrawer
     {
         private readonly string[] popupOptions = { "Use Constant", "Use Variable" };
