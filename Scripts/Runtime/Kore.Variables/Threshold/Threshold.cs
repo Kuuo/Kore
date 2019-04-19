@@ -25,7 +25,7 @@ namespace Kore.Variables
 
         public bool Check(T newValue)
         {
-            int compare = newValue.CompareTo(value);
+            var compare = newValue.CompareTo(value);
 
             if (compare == 0 && valueChangeState != ValueChangeState.Reached)
             {
@@ -33,13 +33,15 @@ namespace Kore.Variables
                 valueChangeState = ValueChangeState.Reached;
                 return true;
             }
-            else if (compare > 0 && valueChangeState != ValueChangeState.Ascended)
+
+            if (compare > 0 && valueChangeState != ValueChangeState.Ascended)
             {
                 onAscended.Invoke();
                 valueChangeState = ValueChangeState.Ascended;
                 return true;
             }
-            else if (compare < 0 && valueChangeState != ValueChangeState.Descended)
+
+            if (compare < 0 && valueChangeState != ValueChangeState.Descended)
             {
                 onDescended.Invoke();
                 valueChangeState = ValueChangeState.Descended;
