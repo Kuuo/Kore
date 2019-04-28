@@ -12,30 +12,31 @@ namespace Kore.Events
         public class ConditionalAction
         {
             public string description;
-            public List<ConditionCheck> conditionChecks;
-            public UnityEvent handle;
+            public List<ConditionCheck> conditions;
+            public UnityEvent action;
 
-            public bool Satisfied => conditionChecks.TrueForAll(c => c.Satisfied);
+            public bool Satisfied => conditions.Count > 0 ?
+                conditions.TrueForAll(c => c.Satisfied) : true;
 
-            public bool CheckAndHandle()
+            public bool TryInvoke()
             {
                 if (Satisfied)
                 {
-                    handle.Invoke();
+                    action.Invoke();
                     return true;
                 }
                 return false;
             }
         }
 
-        public List<ConditionalAction> conditionActions;
+        public List<ConditionalAction> actions;
 
-        public void CheckAndRaise()
+        public void Raise()
         {
-            conditionActions.ForEach(ca =>
+            foreach (var a in actions)
             {
-                if (ca.CheckAndHandle()) return;
-            });
+                if (a.TryInvoke()) return;
+            }
         }
     }
 }
