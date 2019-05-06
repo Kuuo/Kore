@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [System.Serializable]
+    [AddComponentMenu("Kore/Schedule/Schedulables/ConditionDelay")]
     public class ConditionDelaySchedulable : Schedulable
     {
         public ConditionCheck condition;
         public bool targetValue;
 
-        public override IEnumerator Run()
+        protected override IEnumerator ScheduleCoroutine()
         {
             bool ret = condition.Satisfied;
             yield return new WaitUntil(() => targetValue ? ret : !ret);

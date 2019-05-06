@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [System.Serializable]
+    [AddComponentMenu("Kore/Schedule/Schedulables/FrameDelay")]
     public class FrameDelaySchedulable : Schedulable
     {
         public int count = 1;
 
-        public override IEnumerator Run()
+        protected override IEnumerator ScheduleCoroutine()
         {
             for (int i = 0; i < count; i++)
             {

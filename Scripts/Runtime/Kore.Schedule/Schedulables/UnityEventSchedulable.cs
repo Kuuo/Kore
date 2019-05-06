@@ -4,12 +4,12 @@ using UnityEngine.Events;
 
 namespace Kore.Schedule
 {
-    [System.Serializable]
+    [AddComponentMenu("Kore/Schedule/Schedulables/UnityEvent")]
     public class UnityEventSchedulable : Schedulable
     {
         public UnityEvent Event;
 
-        public override IEnumerator Run()
+        protected override IEnumerator ScheduleCoroutine()
         {
             Event.Invoke();
             yield break;

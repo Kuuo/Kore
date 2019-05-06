@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [System.Serializable]
+    [AddComponentMenu("Kore/Schedule/Schedulables/AnimationDelay")]
     // TODO
     public class AnimationDelaySchedulable : Schedulable
     {
-        public override IEnumerator Run()
+        protected override IEnumerator ScheduleCoroutine()
         {
             throw new System.NotImplementedException();
         }

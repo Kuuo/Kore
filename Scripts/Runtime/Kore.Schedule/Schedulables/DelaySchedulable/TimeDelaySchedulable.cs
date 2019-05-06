@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [System.Serializable]
+    [AddComponentMenu("Kore/Schedule/Schedulables/TimeDelay")]
     public class TimeDelaySchedulable : Schedulable
     {
         public float time;
         public bool useRealTime;
 
-        public override IEnumerator Run()
+        protected override IEnumerator ScheduleCoroutine()
         {
             if (useRealTime)
             {

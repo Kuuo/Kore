@@ -10,12 +10,14 @@ namespace Kore.Schedule.Editor
     [CustomEditor(typeof(ScheduleRunner))]
     public class ScheduleRunnerEditor : UnityEditor.Editor
     {
+        private SerializedProperty repeatProp;
         private SerializedProperty scheduleProp;
 
         private ReorderableList reorderableList;
 
         public void OnEnable()
         {
+            repeatProp = serializedObject.FindProperty(nameof(ScheduleRunner.repeat));
             scheduleProp = serializedObject.FindProperty(nameof(ScheduleRunner.schedule));
 
             reorderableList = new ReorderableList(serializedObject, scheduleProp)
@@ -26,9 +28,17 @@ namespace Kore.Schedule.Editor
             };
         }
 
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(repeatProp);
+            reorderableList.DoLayoutList();
+            serializedObject.ApplyModifiedProperties();
+        }
+
         private void drawHeaderCallback(Rect rect)
         {
-            EditorGUI.LabelField(rect, "Schedule");
+            EditorGUI.LabelField(rect, scheduleProp.displayName);
         }
 
         private void drawElementCallback(Rect rect, int index, bool isActive, bool isFocused)
@@ -43,12 +53,5 @@ namespace Kore.Schedule.Editor
             // EditorGUI.Popup()
         }
 
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorGUILayout.Space();
-            reorderableList.DoLayoutList();
-            serializedObject.ApplyModifiedProperties();
-        }
     }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [System.Serializable]
+    [AddComponentMenu("Kore/Schedule/Schedulables/AudioDelay")]
     public class AudioDelaySchedulable : Schedulable
     {
         public AudioClip clip;
 
-        public override IEnumerator Run()
+        protected override IEnumerator ScheduleCoroutine()
         {
             yield return new WaitForSeconds(clip.length);
         }
