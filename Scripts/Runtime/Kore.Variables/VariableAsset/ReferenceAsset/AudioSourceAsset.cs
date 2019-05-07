@@ -7,7 +7,7 @@ namespace Kore.Variables
     {
         public void PlayOneShot(AudioClip clip)
         {
-            Ref.PlayOneShot(clip);
+            Reference.PlayOneShot(clip);
         }
     }
 }

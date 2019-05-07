@@ -21,5 +21,7 @@ namespace Kore.Variables
                 OnValueChanged?.Raise(_value);
             }
         }
+
+        public override string ToString() => _value.ToString();
     }
 }

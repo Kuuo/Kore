@@ -3,8 +3,17 @@
     public abstract class ReferenceAsset<T> : ReferenceAsset
         where T : class
     {
-        public T Ref { get; set; }
+        [UnityEngine.SerializeField]
+        protected T reference;
 
-        public void Release() => Ref = null;
+        public T Reference
+        {
+            get => reference;
+            set => reference = value;
+        }
+
+        public void Release() => reference = null;
+
+        public override string ToString() => reference.ToString();
     }
 }

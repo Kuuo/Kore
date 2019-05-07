@@ -17,7 +17,7 @@ namespace Kore.Schedule
         // Provide for UnityEvent use
         public void Execute()
         {
-            Run();
+            StartCoroutine(Run());
         }
 
         public void Stop()

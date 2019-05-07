@@ -22,8 +22,7 @@ namespace Kore.Utils
 
         public void Log(UnityEngine.Object obj)
         {
-            logger.Log(logType, tag, obj as object, this);
+            logger.Log(logType, tag, obj.ToString(), this);
         }
     }
-
 }
