@@ -33,32 +33,16 @@ namespace Kore.Schedule.Editor
         }
 
         private const float DropdownWidth = 260f;
-        private const string SchedulablesHolderName = "SchedulablesHolder";
+        private const string SchedulablesHolderName = "[SchedulablesHolder]";
 
         public void OnEnable()
         {
             repeatProp = serializedObject.FindProperty(nameof(ScheduleRunner.repeat));
             scheduleProp = serializedObject.FindProperty(nameof(ScheduleRunner.schedule));
 
-            reorderableList = new ReorderableList(serializedObject, scheduleProp)
-            {
-                drawHeaderCallback = drawHeaderCallback,
-                drawElementCallback = drawElementCallback,
-                onAddDropdownCallback = onAddDropdownCallback,
-                onRemoveCallback = onRemoveCallback
-            };
-        }
-
-        private void onRemoveCallback(ReorderableList list)
-        {
-            int index = list.index;
-            DestroyImmediate(Target.schedule[index]);
-            ArrayUtility.RemoveAt(ref Target.schedule, index);
-
-            if (Target.schedule.Length == 0)
-            {
-                DestroyImmediate(SchedulablesHolder);
-            }
+            reorderableList = ReorderableListHelper.GetSimple(serializedObject, scheduleProp)
+                                                   .OnAddDropdown(OnAddDropdownCallback)
+                                                   .OnRemove(OnRemoveCallback);
         }
 
         public override void OnInspectorGUI()
@@ -69,19 +53,7 @@ namespace Kore.Schedule.Editor
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void drawHeaderCallback(Rect rect)
-        {
-            EditorGUI.LabelField(rect, scheduleProp.displayName);
-        }
-
-        private void drawElementCallback(Rect rect, int index, bool isActive, bool isFocused)
-        {
-            rect.y += 2;
-            rect.height -= 4;
-            EditorGUI.PropertyField(rect, scheduleProp.GetArrayElementAtIndex(index), GUIContent.none);
-        }
-
-        private void onAddDropdownCallback(Rect buttonRect, ReorderableList list)
+        private void OnAddDropdownCallback(Rect buttonRect, ReorderableList list)
         {
             var dropdown = new SubTypesDropdown(typeof(Schedulable), AddSchedulable);
 
@@ -93,6 +65,18 @@ namespace Kore.Schedule.Editor
         {
             var newSchedulable = SchedulablesHolder.AddComponent(schedulableType) as Schedulable;
             ArrayUtility.Add(ref Target.schedule, newSchedulable);
+        }
+
+        private void OnRemoveCallback(ReorderableList list)
+        {
+            int index = list.index;
+            DestroyImmediate(Target.schedule[index]);
+            ArrayUtility.RemoveAt(ref Target.schedule, index);
+
+            if (Target.schedule.Length == 0)
+            {
+                DestroyImmediate(SchedulablesHolder);
+            }
         }
     }
 }

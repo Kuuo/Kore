@@ -1,13 +1,12 @@
 {
-    "name": "com.kl6g.kore",
-    "displayName": "Kore",
-    "version": "0.0.1-preview",
-    "unity": "2018.1",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Kuuo/Kore.git"
-    },
-    "description": "A Unity library aims to make your game architecture more modular and flexible",
-    "keywords": [],
-    "dependencies": {}
+  "name": "com.kl6g.kore",
+  "displayName": "Kore",
+  "version": "0.0.1-preview",
+  "unity": "2019.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kuuo/Kore.git"
+  },
+  "description": "A Unity library aims to make your game architecture more modular and flexible",
+  "keywords": []
 }

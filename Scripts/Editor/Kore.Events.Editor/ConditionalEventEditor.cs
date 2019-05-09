@@ -37,23 +37,25 @@ namespace Kore.Events.Editor
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUI.indentLevel++;
 
-            if (EditorGUILayout.PropertyField(prop))
-            {
-                var curProp = prop.Copy();
-                if (curProp.NextVisible(true))
-                {
-                    do
-                    {
-                        EditorGUILayout.PropertyField(curProp, true);
-                    } while (curProp.NextVisible(false));
-                }
-                GUILayout.Space(6f);
-                if (GUILayout.Button("Remove This Entry"))
-                {
-                    actionsProp.DeleteArrayElementAtIndex(index);
-                }
-                GUILayout.Space(6f);
-            }
+            EditorGUILayout.PropertyField(prop, true);
+
+            // if (EditorGUILayout.PropertyField(prop))
+            // {
+            //     var curProp = prop.Copy();
+            //     if (curProp.NextVisible(true))
+            //     {
+            //         do
+            //         {
+            //             EditorGUILayout.PropertyField(curProp, true);
+            //         } while (curProp.NextVisible(false));
+            //     }
+            //     GUILayout.Space(6f);
+            //     if (GUILayout.Button("Remove This Entry"))
+            //     {
+            //         actionsProp.DeleteArrayElementAtIndex(index);
+            //     }
+            //     GUILayout.Space(6f);
+            // }
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
         }
@@ -61,10 +63,17 @@ namespace Kore.Events.Editor
         private void DoAddButtonDraw()
         {
             GUILayout.Space(6f);
-            if (GUILayout.Button("Add New Entry", GUILayout.Height(24f)))
+
+            var addButtonContent = new GUIContent("Add New Entry");
+            var addButtonWidth = 160f;
+
+            var buttonRect = GUILayoutUtility.GetRect(addButtonContent, GUI.skin.button);
+            buttonRect.x += (buttonRect.width - addButtonWidth) / 2f;
+            buttonRect.width = addButtonWidth;
+
+            if (GUI.Button(buttonRect, addButtonContent))
             {
                 actionsProp.arraySize++;
-                serializedObject.ApplyModifiedProperties();
             }
         }
     }

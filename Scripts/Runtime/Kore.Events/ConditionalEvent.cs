@@ -11,6 +11,7 @@ namespace Kore.Events
         [System.Serializable]
         public class ConditionalAction
         {
+            [TextArea]
             public string description;
             public List<ConditionCheck> conditions;
             public UnityEvent action;

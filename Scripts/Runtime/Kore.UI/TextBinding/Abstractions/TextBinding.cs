@@ -12,5 +12,5 @@ namespace Kore.UI
         {
             bindText.text = text;
         }
-    } 
+    }
 }
