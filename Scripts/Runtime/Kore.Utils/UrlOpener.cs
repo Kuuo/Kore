@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Kore.Variables;
 
 namespace Kore.Utils
 {
@@ -15,6 +16,11 @@ namespace Kore.Utils
         public void Open(string url)
         {
             Application.OpenURL(url);
+        }
+
+        public void Open(StringAsset stringAsset)
+        {
+            Open(stringAsset.Reference);
         }
     }
 }
