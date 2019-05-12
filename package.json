@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/Kuuo/Kore.git"
   },
-  "description": "A Unity library aims to make your game architecture more modular and flexible",
-  "keywords": []
+  "description": "A Unity library, framework that makes your game architecture more modular and flexible",
+  "keywords": [],
+  "dependencies": {
+    "com.unity.textmeshpro": "2.0.0"
+  }
 }

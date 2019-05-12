@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Kore.Utils
 {
-    [AddComponentMenu("Kore/Utils/GameObject/GameObjectActivator")]
+    [AddComponentMenu("Kore/Utils/Object/GameObject Activator")]
     public class GameObjectActivator : MonoBehaviour
     {
         public void Activate(GameObject gameObject)

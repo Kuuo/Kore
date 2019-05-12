@@ -2,29 +2,19 @@
 
 namespace Kore.Variables.UI
 {
-    public abstract class ValueAssetTextBinding<TValue> : TextBinding
+    public abstract class ValueAssetTextBinding<TValue> : TextBinding<TValue>
         where TValue : struct
     {
-        public abstract ValueAsset<TValue> valueAsset { get; }
-
-        private void Start()
-        {
-            SetText(valueAsset.Value);
-        }
+        protected abstract ValueAsset<TValue> valueAsset { get; }
 
         private void OnEnable()
         {
-            valueAsset.OnValueChanged.AddListener(SetText);
+            valueAsset.OnValueChanged?.AddListener(SetText);
         }
 
         private void OnDisable()
         {
-            valueAsset.OnValueChanged.RemoveListener(SetText);
-        }
-
-        protected virtual void SetText(TValue newValue)
-        {
-            SetText(newValue.ToString());
+            valueAsset.OnValueChanged?.RemoveListener(SetText);
         }
     }
 }

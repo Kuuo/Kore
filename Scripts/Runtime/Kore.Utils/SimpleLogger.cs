@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Kore.Utils
 {
-    [CreateAssetMenu(menuName = "Kore/Utils/SimpleLogger")]
+    [CreateAssetMenu(menuName = "Kore/Utils/Simple Logger")]
     public class SimpleLogger : ScriptableObject
     {
         private static ILogger logger = Debug.unityLogger;

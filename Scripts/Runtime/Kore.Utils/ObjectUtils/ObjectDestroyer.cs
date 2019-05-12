@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Kore.Utils
 {
-    [AddComponentMenu("Kore/Utils/ObjectDestroyer")]
+    [AddComponentMenu("Kore/Utils/Object/Object Destroyer")]
     public class ObjectDestroyer : MonoBehaviour
     {
         public float delay = 0f;

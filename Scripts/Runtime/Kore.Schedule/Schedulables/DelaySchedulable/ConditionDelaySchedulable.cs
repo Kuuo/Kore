@@ -8,12 +8,11 @@ namespace Kore.Schedule
     public class ConditionDelaySchedulable : Schedulable
     {
         public ConditionCheck condition;
-        public bool targetValue;
+        public bool target;
 
         protected override IEnumerator ScheduleCoroutine()
         {
-            bool ret = condition.Satisfied;
-            yield return new WaitUntil(() => targetValue ? ret : !ret);
+            yield return new WaitUntil(() => !(target ^ condition.Satisfied));
         }
     }
 }
