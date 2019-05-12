@@ -32,15 +32,29 @@ namespace Kore.Events
             }
         }
 
-        [Tooltip("If checked, multiple satisfied conditional actions will be raised, otherwise, only the first satisfied one will be raised.")]
+        [Tooltip("If checked, multiple satisfied conditional actions will be raised, otherwise, only the first satisfied one will be raised")]
         public bool checkAllConditions;
         public List<ConditionalAction> actions;
 
+        [Tooltip("If checked, the Default Action will allways run despite of the checked conditions.")]
+        public bool alwaysRunDefault;
+        public UnityEvent defaultAction;
+
         public void Raise()
         {
+            bool anySatisfied = false;
             foreach (var a in actions)
             {
-                if (a.TryInvoke() && !checkAllConditions) break;
+                if (a.TryInvoke() && !checkAllConditions)
+                {
+                    anySatisfied = true;
+                    break;
+                }
+            }
+
+            if (!anySatisfied || alwaysRunDefault)
+            {
+                defaultAction.Invoke();
             }
         }
     }

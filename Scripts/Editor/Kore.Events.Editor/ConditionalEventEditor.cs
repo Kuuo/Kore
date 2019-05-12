@@ -10,32 +10,40 @@ namespace Kore.Events.Editor
     {
         private SerializedProperty checkAllConditionsProp;
         private SerializedProperty actionsProp;
+        private SerializedProperty alwasyRunDefaultProp;
+        private SerializedProperty defaultActionProp;
 
         private readonly string checkAllConditionsPropName = nameof(ConditionalEvent.checkAllConditions);
         private readonly string actionsPropName = nameof(ConditionalEvent.actions);
+        private readonly string defaultActionPropName = nameof(ConditionalEvent.defaultAction);
+        private readonly string alwasyRunDefaultPropName = nameof(ConditionalEvent.alwaysRunDefault);
 
         private void OnEnable()
         {
             checkAllConditionsProp = serializedObject.FindProperty(checkAllConditionsPropName);
             actionsProp = serializedObject.FindProperty(actionsPropName);
+            defaultActionProp = serializedObject.FindProperty(defaultActionPropName);
+            alwasyRunDefaultProp = serializedObject.FindProperty(alwasyRunDefaultPropName);
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-
-            EditorGUILayout.PropertyField(checkAllConditionsProp);
-
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Conditional Actions", EditorStyles.boldLabel);
 
+            EditorGUILayout.LabelField("Default Action", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(alwasyRunDefaultProp, new GUIContent("Always Run"));
+            EditorGUILayout.PropertyField(defaultActionProp);
+
+            EditorGUILayout.LabelField("Conditional Actions", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(checkAllConditionsProp);
             for (int i = 0; i < actionsProp.arraySize; i++)
             {
                 var prop = actionsProp.GetArrayElementAtIndex(i);
                 DoConditionalActionDraw(prop, i);
             }
-
             DoAddButtonDraw();
+
             serializedObject.ApplyModifiedProperties();
         }
 
