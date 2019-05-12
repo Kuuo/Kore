@@ -22,7 +22,7 @@ namespace Kore.UI
 
         protected virtual void SetText(TValue newValue)
         {
-            string text = string.Format($"{{0:({format})}}", newValue);
+            string text = string.Format($"{{0:{format}}}", newValue);
             bindText.text = text;
         }
     }
