@@ -8,7 +8,7 @@ namespace Kore.Editor
 {
     public static class ReorderableListHelper
     {
-        public static ReorderableList GetSimple(SerializedObject serializedObject, SerializedProperty property)
+        public static ReorderableList CreateSimple(SerializedObject serializedObject, SerializedProperty property)
         {
             return new ReorderableList(serializedObject, property)
             {

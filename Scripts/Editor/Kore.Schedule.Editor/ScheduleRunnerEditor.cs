@@ -40,7 +40,7 @@ namespace Kore.Schedule.Editor
             repeatProp = serializedObject.FindProperty(nameof(ScheduleRunner.repeat));
             scheduleProp = serializedObject.FindProperty(nameof(ScheduleRunner.schedule));
 
-            reorderableList = ReorderableListHelper.GetSimple(serializedObject, scheduleProp)
+            reorderableList = ReorderableListHelper.CreateSimple(serializedObject, scheduleProp)
                                                    .OnAddDropdown(OnAddDropdownCallback)
                                                    .OnRemove(OnRemoveCallback);
         }

@@ -4,15 +4,19 @@ using Kore.Variables;
 
 namespace Kore.Variables.Editor
 {
-    // [CustomPropertyDrawer(typeof(IntReference))]
-    public class IntReferenceDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(IntReference))]
+    [CustomPropertyDrawer(typeof(FloatReference))]
+    [CustomPropertyDrawer(typeof(BoolReference))]
+    public class ValueReferenceDrawer : PropertyDrawer
     {
-        private readonly string[] popupOptions = { "Use Constant", "Use Variable" };
+        private readonly string[] popupOptions = { "Use Local", "Use Asset" };
 
-        private GUIStyle popupStyle = new GUIStyle(GUI.skin.GetStyle("PaneOptions"))
+        private readonly GUIStyle popupStyle = new GUIStyle(GUI.skin.GetStyle("PaneOptions"))
         {
             imagePosition = ImagePosition.ImageOnly
         };
+
+        protected virtual string GetAssetPropName() => "asset";
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -22,9 +26,9 @@ namespace Kore.Variables.Editor
             EditorGUI.BeginChangeCheck();
 
             // Get properties
-            SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
-            SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
-            SerializedProperty variable = property.FindPropertyRelative("variable");
+            SerializedProperty useLocal = property.FindPropertyRelative("useLocalValue");
+            SerializedProperty localValue = property.FindPropertyRelative("localValue");
+            SerializedProperty asset = property.FindPropertyRelative(GetAssetPropName());
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);
@@ -36,12 +40,12 @@ namespace Kore.Variables.Editor
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            int result = EditorGUI.Popup(buttonRect, useConstant.boolValue ? 0 : 1, popupOptions, popupStyle);
+            int result = EditorGUI.Popup(buttonRect, useLocal.boolValue ? 0 : 1, popupOptions, popupStyle);
 
-            useConstant.boolValue = result == 0;
+            useLocal.boolValue = result == 0;
 
             EditorGUI.PropertyField(position,
-                useConstant.boolValue ? constantValue : variable,
+                useLocal.boolValue ? localValue : asset,
                 GUIContent.none);
 
             if (EditorGUI.EndChangeCheck())
