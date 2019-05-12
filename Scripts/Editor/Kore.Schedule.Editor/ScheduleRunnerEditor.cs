@@ -20,10 +20,10 @@ namespace Kore.Schedule.Editor
         {
             get
             {
-                var holderTransform = Target.transform.Find(SchedulablesHolderName);
+                var holderTransform = Target.transform.Find(ScheduleHolderName);
                 if (!holderTransform)
                 {
-                    var newHolder = new GameObject(SchedulablesHolderName);
+                    var newHolder = new GameObject(ScheduleHolderName);
                     holderTransform = newHolder.transform;
                     holderTransform.position = Vector3.zero;
                     holderTransform.parent = Target.transform;
@@ -33,7 +33,7 @@ namespace Kore.Schedule.Editor
         }
 
         private const float DropdownWidth = 260f;
-        private const string SchedulablesHolderName = "[SchedulablesHolder]";
+        private const string ScheduleHolderName = "[ScheduleHolder]";
 
         public void OnEnable()
         {
