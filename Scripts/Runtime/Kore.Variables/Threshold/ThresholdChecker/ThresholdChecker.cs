@@ -31,6 +31,6 @@ namespace Kore.Variables
         {
             Array.Sort(Thresholds);
         }
-    }
 #endif
+    }
 }
