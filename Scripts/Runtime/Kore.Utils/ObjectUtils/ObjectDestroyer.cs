@@ -17,6 +17,11 @@ namespace Kore.Utils
             DoDestroy(obj);
         }
 
+        public void DestroyGameObject(Component obj)
+        {
+            DoDestroy(obj.gameObject);
+        }
+
         public void DestroyImmediate(GameObject obj)
         {
             DoDestroyImmediate(obj);
@@ -25,6 +30,11 @@ namespace Kore.Utils
         public void DestroyImmediate(Component obj)
         {
             DoDestroyImmediate(obj);
+        }
+
+        public void DestroyGameObjectImmediate(Component obj)
+        {
+            DoDestroyImmediate(obj.gameObject);
         }
 
         private void DoDestroy(Object obj)
