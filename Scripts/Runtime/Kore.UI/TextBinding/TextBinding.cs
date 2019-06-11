@@ -12,7 +12,7 @@ namespace Kore.UI
 
         protected abstract TValue value { get; }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             if (setValuOnEnable)
             {

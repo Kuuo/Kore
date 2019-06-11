@@ -7,8 +7,9 @@ namespace Kore.Variables.UI
     {
         protected abstract ValueAsset<TValue> valueAsset { get; }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             valueAsset.OnValueChanged?.AddListener(SetText);
         }
 
