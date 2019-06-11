@@ -15,6 +15,8 @@ namespace Kore.Variables
             set { _onValueChangeEvent = value as BoolGameEvent; }
         }
 
+        public void Set(BoolAsset asset) => Value = asset.Value;
+
         public static implicit operator bool(BoolAsset v) => v.Value;
     }
 }

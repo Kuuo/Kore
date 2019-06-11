@@ -19,6 +19,8 @@ namespace Kore.Variables
 
         public void Add(IntAsset asset) => Value += asset.Value;
 
+        public void Set(IntAsset asset) => Value = asset.Value;
+
         public static implicit operator int(IntAsset v) => v.Value;
     }
 }
