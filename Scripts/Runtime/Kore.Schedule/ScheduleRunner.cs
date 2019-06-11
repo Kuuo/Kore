@@ -12,7 +12,7 @@ namespace Kore.Schedule
 
         private int round = 0;
 
-        private const int RepeatInfCount = -1;
+        public const int RepeatInfCount = -1;
 
         private bool ShouldRunning => repeat == RepeatInfCount || (repeat > 0 && round < repeat);
 
@@ -28,13 +28,5 @@ namespace Kore.Schedule
                 round++;
             }
         }
-
-
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            repeat = Mathf.Max(repeat, RepeatInfCount);
-        }
-#endif
     }
 }

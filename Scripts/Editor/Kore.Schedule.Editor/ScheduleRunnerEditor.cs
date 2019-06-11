@@ -10,6 +10,7 @@ namespace Kore.Schedule.Editor
     [CustomEditor(typeof(ScheduleRunner))]
     public partial class ScheduleRunnerEditor : UnityEditor.Editor
     {
+        private SerializedProperty runDirectlyOnStartProp;
         private SerializedProperty repeatProp;
         private SerializedProperty scheduleProp;
 
@@ -37,6 +38,7 @@ namespace Kore.Schedule.Editor
 
         public void OnEnable()
         {
+            runDirectlyOnStartProp = serializedObject.FindProperty(nameof(ScheduleRunner.runDirectlyOnStart));
             repeatProp = serializedObject.FindProperty(nameof(ScheduleRunner.repeat));
             scheduleProp = serializedObject.FindProperty(nameof(ScheduleRunner.schedule));
 
@@ -48,7 +50,14 @@ namespace Kore.Schedule.Editor
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+            EditorGUILayout.PropertyField(runDirectlyOnStartProp);
+
             EditorGUILayout.PropertyField(repeatProp);
+            if (repeatProp.intValue < ScheduleRunner.RepeatInfCount)
+            {
+                repeatProp.intValue = ScheduleRunner.RepeatInfCount;
+            }
+
             reorderableList.DoLayoutList();
             serializedObject.ApplyModifiedProperties();
         }

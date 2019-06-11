@@ -4,10 +4,11 @@ using UnityEngine;
 namespace Kore.Schedule
 {
     [AddComponentMenu("Kore/Schedule/Schedulables/TimeDelay")]
-    public class TimeDelaySchedulable : Schedulable
+    public abstract class AbstractTimeDelaySchedulable : Schedulable
     {
-        public float time;
         public bool useRealTime;
+
+        protected abstract float time { get; }
 
         protected override IEnumerator ScheduleCoroutine()
         {

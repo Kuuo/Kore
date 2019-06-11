@@ -5,8 +5,7 @@ namespace Kore.Schedule
 {
     public abstract class Schedulable : MonoBehaviour
     {
-        [SerializeField]
-        protected bool runDirectlyOnStart;
+        public bool runDirectlyOnStart;
 
         protected Coroutine coroutine;
 
@@ -17,7 +16,6 @@ namespace Kore.Schedule
             yield return coroutine = StartCoroutine(ScheduleCoroutine());
         }
 
-        // Provide for UnityEvent use
         public void RunDirectly()
         {
             StartCoroutine(Run());
