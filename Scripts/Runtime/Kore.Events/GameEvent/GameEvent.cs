@@ -10,7 +10,10 @@ namespace Kore.Events
 
         public void Raise()
         {
-            listeners.ForEach(l => l.Response());
+            for (int i = 0, len = listeners.Count; i < len; i++)
+            {
+                listeners[i]?.Response();
+            }
         }
 
         public void AddListener(GameEventListener listener)
