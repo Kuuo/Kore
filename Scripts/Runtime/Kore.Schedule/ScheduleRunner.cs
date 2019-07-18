@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/ScheduleRunner")]
+    [AddComponentMenu("Kore/Schedule/Schedule Runner")]
     public class ScheduleRunner : Schedulable
     {
         public int repeat = 1;

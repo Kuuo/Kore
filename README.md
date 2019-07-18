@@ -13,8 +13,6 @@ A Unity common library, framework.
     - MonoBehaviourEventTrigger
   - UnityEventRaiser
   - ConditionalEvent
-- Kore.UI
-  - Abstract TextBinding
 - Kore.Utils
   - GameObjectUtils
     - Activator
@@ -25,11 +23,11 @@ A Unity common library, framework.
   - SimpleLogger
   - UriOpener
 - Kore.Variables
-  - ValueAssets
+  - ValueAsset
     - ValueCheck
-    - ValueAssetsTextBinding
+    - ValueAssetTextBinding
   - ReferenceAssets
-  - ThresholdValue
+  - Threshold
 
 ## TODO
 
@@ -39,4 +37,3 @@ A Unity common library, framework.
    - Timer
 - Threshold Values
 - Unity RichText Utils
-

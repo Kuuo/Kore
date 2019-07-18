@@ -2,7 +2,7 @@
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedulables/AudioDelay")]
+    [AddComponentMenu("Kore/Schedule/Schedulables/Audio Delay Schedulable")]
     public class AudioDelaySchedulable : AbstractTimeDelaySchedulable
     {
         public AudioClip clip;

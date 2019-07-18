@@ -8,7 +8,5 @@ namespace Kore.Variables.UI
         public IntAsset asset;
 
         protected override ValueAsset<int> valueAsset => asset;
-
-        protected override int value => asset.Value;
     }
 }

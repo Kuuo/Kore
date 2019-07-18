@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedulables/TimeDelay")]
     public abstract class AbstractTimeDelaySchedulable : Schedulable
     {
         public bool useRealTime;

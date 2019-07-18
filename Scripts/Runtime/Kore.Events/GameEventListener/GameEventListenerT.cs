@@ -3,22 +3,11 @@ using UnityEngine.Events;
 
 namespace Kore.Events
 {
-    public abstract class GameEventListener<T> : MonoBehaviour
+    public abstract class GameEventListener<T> : AbstractGameEventListener<T>
     {
-        protected abstract GameEvent<T> listeningEvent { get; }
         protected abstract UnityEvent<T> eventHandle { get; }
 
-        private void OnEnable()
-        {
-            listeningEvent.AddListener(Response);
-        }
-
-        private void OnDisable()
-        {
-            listeningEvent.RemoveListener(Response);
-        }
-
-        public void Response(T arg)
+        public override void Response(T arg)
         {
             eventHandle?.Invoke(arg);
         }

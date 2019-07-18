@@ -8,7 +8,5 @@ namespace Kore.Variables.UI
         public BoolAsset asset;
 
         protected override ValueAsset<bool> valueAsset => asset;
-
-        protected override bool value => asset.Value;
     }
 }

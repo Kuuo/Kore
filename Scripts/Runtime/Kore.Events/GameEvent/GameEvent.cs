@@ -6,17 +6,17 @@ namespace Kore.Events
     [CreateAssetMenu(menuName = "Kore/GameEvent/GameEvent")]
     public class GameEvent : ScriptableObject
     {
-        protected List<GameEventListener> listeners = new List<GameEventListener>();
+        protected List<AbstractGameEventListener> listeners = new List<AbstractGameEventListener>();
 
         public void Raise()
         {
             for (int i = 0, len = listeners.Count; i < len; i++)
             {
-                listeners[i]?.Response();
+                if (listeners[i]) listeners[i].Response();
             }
         }
 
-        public void AddListener(GameEventListener listener)
+        public void AddListener(AbstractGameEventListener listener)
         {
             if (!listeners.Contains(listener))
             {
@@ -24,7 +24,7 @@ namespace Kore.Events
             }
         }
 
-        public void RemoveListener(GameEventListener listener)
+        public void RemoveListener(AbstractGameEventListener listener)
         {
             if (listeners.Contains(listener))
             {

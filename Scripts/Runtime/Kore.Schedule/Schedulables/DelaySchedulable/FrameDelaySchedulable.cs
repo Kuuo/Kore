@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedulables/FrameDelay")]
+    [AddComponentMenu("Kore/Schedule/Schedulables/Frame Delay Schedulable")]
     public class FrameDelaySchedulable : Schedulable
     {
         public int count = 1;
