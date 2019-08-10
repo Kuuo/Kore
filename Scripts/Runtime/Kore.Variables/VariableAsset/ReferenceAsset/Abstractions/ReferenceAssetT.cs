@@ -12,7 +12,9 @@
             set => reference = value;
         }
 
-        public void Release() => reference = null;
+        public override void Set(UnityEngine.Object obj) => Reference = obj as T;
+
+        public override void Release() => reference = null;
 
         public override string ToString() => reference.ToString();
     }

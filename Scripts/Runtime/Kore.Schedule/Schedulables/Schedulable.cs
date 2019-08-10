@@ -5,33 +5,25 @@ namespace Kore.Schedule
 {
     public abstract class Schedulable : MonoBehaviour
     {
-        public bool runDirectlyOnStart;
-
         protected Coroutine coroutine;
 
         protected abstract IEnumerator ScheduleCoroutine();
 
-        public IEnumerator Run()
+        public IEnumerator RunCoroutine()
         {
             yield return coroutine = StartCoroutine(ScheduleCoroutine());
         }
 
         public void RunDirectly()
         {
-            StartCoroutine(Run());
+            StartCoroutine(RunCoroutine());
         }
 
         public void Stop()
         {
-            if (coroutine == null) return;
-            StopCoroutine(coroutine);
-        }
-
-        private void Start()
-        {
-            if (runDirectlyOnStart)
+            if (coroutine != null)
             {
-                RunDirectly();
+                StopCoroutine(coroutine);
             }
         }
     }

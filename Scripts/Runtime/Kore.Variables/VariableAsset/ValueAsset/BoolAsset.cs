@@ -16,7 +16,5 @@ namespace Kore.Variables
         }
 
         public void Set(BoolAsset asset) => Value = asset.Value;
-
-        public static implicit operator bool(BoolAsset v) => v.Value;
     }
 }

@@ -2,38 +2,26 @@
 A Unity common library, framework.
 
 ## Features
-- Kore
-  - LayerMaskExtension
-- Kore.Conditions
-  - LayerCheck
-- Kore.Events
-  - GameEvents & GameEventListeners
-  - Monobehaviour Events
-    - Almost all MonoBehaviour message events
-    - MonoBehaviourEventTrigger
-  - UnityEventRaiser
-  - ConditionalEvent
-- Kore.Utils
-  - GameObjectUtils
-    - Activator
-    - Destroyer
-  - GizmoDrawers
-  - Screenshoter
-  - SimpleKeyboardEvent
-  - SimpleLogger
-  - UriOpener
-- Kore.Variables
-  - ValueAsset
-    - ValueCheck
-    - ValueAssetTextBinding
-  - ReferenceAssets
-  - Threshold
+- Scriptable Object Variable
+- Scriptable Object GameEvent
+- Events
+- Schedule
+- Utils
+
 
 ## TODO
 
 - Scene Loader
    - Scene Reference Attribute
-- Schedulable Task
+- Schedule Runner
+   - UI
    - Timer
 - Threshold Values
 - Unity RichText Utils
+- Reference Variable
+   - UI
+- Developer Note
+- Extensions
+   - Vector utils
+   - Math utils (Swap)
+

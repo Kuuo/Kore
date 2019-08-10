@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityObject = UnityEngine.Object;
 
 namespace Kore.Utils
 {
@@ -15,14 +14,14 @@ namespace Kore.Utils
         public string tag = "<color=grey>SimpleLogger</color>";
 
 
-        public void Log(string message)
-        {
-            logger.Log(logType, tag, message, this);
-        }
+        public void Log(string message) => logger.Log(logType, tag, message, this);
 
-        public void Log(UnityEngine.Object obj)
-        {
-            logger.Log(logType, tag, obj.ToString(), this);
-        }
+        public void Log(object obj) => Log(obj.ToString());
+
+        public void Log(UnityObject obj) => Log(obj);
+
+        public void LogObjectName(UnityObject obj) => Log(obj.name);
+
+        public void Log(Transform transform) => Log(transform.position);
     }
 }

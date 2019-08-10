@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using Kore.Events;
 
 namespace Kore.Utils
 {

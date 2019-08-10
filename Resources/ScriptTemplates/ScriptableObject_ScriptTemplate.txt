@@ -1,0 +1,10 @@
+using UnityEngine;
+using Kore;
+
+namespace #NAMESPACE#
+{
+    [CreateAssetMenu(menuName = "#SCRIPTNAME#")]
+    public class #SCRIPTNAME# : ScriptableObject
+    {
+    }
+}

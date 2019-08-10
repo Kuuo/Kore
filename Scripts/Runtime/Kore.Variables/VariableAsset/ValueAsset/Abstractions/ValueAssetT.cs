@@ -6,22 +6,36 @@ namespace Kore.Variables
     public abstract class ValueAsset<T> : ValueAsset
         where T : struct
     {
-        [SerializeField]
+        [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("_value")]
+        private T defaultValue = default;
+
         private T _value;
+
+        public override object objectValue => _value;
 
         public abstract GameEvent<T> OnValueChanged { get; set; }
 
         public T Value
         {
-            get { return _value; }
+            get => _value;
             set
             {
                 if (value.Equals(_value)) return;
+
                 _value = value;
-                OnValueChanged?.Raise(_value);
+
+                if (OnValueChanged)
+                {
+                    OnValueChanged.Invoke(_value);
+                }
             }
         }
 
-        public override string ToString() => _value.ToString();
+        protected virtual void OnEnable()
+        {
+            _value = defaultValue;
+        }
+
+        public static implicit operator T(ValueAsset<T> valueAsset) => valueAsset.Value;
     }
 }

@@ -1,0 +1,11 @@
+using UnityEngine;
+using Kore.Variables;
+
+namespace #NAMESPACE#
+{
+    [CreateAssetMenu(menuName = "Kore/VariableAsset/Reference/#REFERENCETYPE#",
+                     fileName = "#REFERENCETYPE# Reference")]
+    public class #REFERENCETYPE#Asset : ReferenceAsset<#REFERENCETYPE#>
+    {
+    }
+}

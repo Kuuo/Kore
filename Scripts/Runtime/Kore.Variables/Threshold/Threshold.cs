@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Kore.Variables
 {
     [Serializable]
-    public class Threshold<T> : IComparable<Threshold<T>>
+    public abstract class Threshold<T> : IComparable<Threshold<T>>
         where T : struct, IComparable<T>
     {
         protected enum ValueChangeState
@@ -13,8 +13,8 @@ namespace Kore.Variables
             Ascended, Reached, Descended
         }
 
+        [SerializeField] private T value = default;
 
-        [SerializeField] protected T value;
         [SerializeField] private UnityEvent onAscended = new UnityEvent();
         [SerializeField] private UnityEvent onReached = new UnityEvent();
         [SerializeField] private UnityEvent onDescended = new UnityEvent();
@@ -53,7 +53,7 @@ namespace Kore.Variables
 
         public int CompareTo(Threshold<T> other)
         {
-            return value.CompareTo(other.value);
+            return Value.CompareTo(other.Value);
         }
     }
 }

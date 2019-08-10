@@ -1,0 +1,9 @@
+using UnityEngine;
+using Kore;
+
+namespace #NAMESPACE#
+{
+    public class #SCRIPTNAME# : MonoBehaviour
+    {
+    }
+}

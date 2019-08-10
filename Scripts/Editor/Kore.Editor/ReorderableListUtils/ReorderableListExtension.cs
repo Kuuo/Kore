@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEditorInternal;
+﻿using UnityEditorInternal;
 
 namespace Kore.Editor
 {

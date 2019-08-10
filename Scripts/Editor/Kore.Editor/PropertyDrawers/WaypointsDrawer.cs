@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using System;
 
-namespace Kore.Editor
+namespace Kore.Editor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(Waypoints))]
     public class WaypointsDrawer : PropertyDrawer

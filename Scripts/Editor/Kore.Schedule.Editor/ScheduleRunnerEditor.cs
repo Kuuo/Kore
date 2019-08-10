@@ -10,7 +10,7 @@ namespace Kore.Schedule.Editor
     [CustomEditor(typeof(ScheduleRunner))]
     public partial class ScheduleRunnerEditor : UnityEditor.Editor
     {
-        private SerializedProperty runDirectlyOnStartProp;
+        private SerializedProperty runOnStartProp;
         private SerializedProperty repeatProp;
         private SerializedProperty scheduleProp;
 
@@ -24,10 +24,10 @@ namespace Kore.Schedule.Editor
                 var holderTransform = Target.transform.Find(ScheduleHolderName);
                 if (!holderTransform)
                 {
-                    var newHolder = new GameObject(ScheduleHolderName);
-                    holderTransform = newHolder.transform;
-                    holderTransform.position = Vector3.zero;
+                    holderTransform = (new GameObject(ScheduleHolderName)).transform;
                     holderTransform.parent = Target.transform;
+                    holderTransform.localPosition = Vector3.zero;
+                    holderTransform.localScale = Vector3.one;
                 }
                 return holderTransform.gameObject;
             }
@@ -38,7 +38,7 @@ namespace Kore.Schedule.Editor
 
         public void OnEnable()
         {
-            runDirectlyOnStartProp = serializedObject.FindProperty(nameof(ScheduleRunner.runDirectlyOnStart));
+            runOnStartProp = serializedObject.FindProperty(nameof(ScheduleRunner.runOnStart));
             repeatProp = serializedObject.FindProperty(nameof(ScheduleRunner.repeat));
             scheduleProp = serializedObject.FindProperty(nameof(ScheduleRunner.schedule));
 
@@ -50,13 +50,14 @@ namespace Kore.Schedule.Editor
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            EditorGUILayout.PropertyField(runDirectlyOnStartProp);
+            EditorGUILayout.PropertyField(runOnStartProp);
 
             EditorGUILayout.PropertyField(repeatProp);
             if (repeatProp.intValue < ScheduleRunner.RepeatInfCount)
             {
                 repeatProp.intValue = ScheduleRunner.RepeatInfCount;
             }
+            EditorGUILayout.Space();
 
             reorderableList.DoLayoutList();
             serializedObject.ApplyModifiedProperties();
@@ -67,11 +68,19 @@ namespace Kore.Schedule.Editor
             var dropdown = new SubTypesDropdown(typeof(Schedulable), AddSchedulable);
 
             buttonRect.xMin = buttonRect.xMax - DropdownWidth;
+
+            dropdown.Add(null);
             dropdown.Show(buttonRect);
         }
 
         private void AddSchedulable(Type schedulableType)
         {
+            if (schedulableType == null)
+            {
+                ArrayUtility.Add(ref Target.schedule, null);
+                return;
+            }
+
             var newSchedulable = SchedulablesHolder.AddComponent(schedulableType) as Schedulable;
             ArrayUtility.Add(ref Target.schedule, newSchedulable);
         }

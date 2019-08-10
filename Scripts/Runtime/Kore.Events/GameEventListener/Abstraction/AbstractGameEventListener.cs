@@ -10,12 +10,18 @@ namespace Kore.Events
 
         protected virtual void OnEnable()
         {
-            listeningEvent.AddListener(this);
+            if (listeningEvent)
+            {
+                listeningEvent.AddListener(Response);
+            }
         }
 
         protected virtual void OnDisable()
         {
-            listeningEvent.RemoveListener(this);
+            if (listeningEvent)
+            {
+                listeningEvent.RemoveListener(Response);
+            }
         }
 
         public abstract void Response();

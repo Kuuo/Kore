@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 namespace Kore.Events
 {
     public abstract class GameEvent<T> : ScriptableObject
     {
-        protected List<AbstractGameEventListener<T>> _listeners = new List<AbstractGameEventListener<T>>();
+        protected abstract UnityEvent<T> persistListener { get; }
 
-        public void Raise(T arg)
+        protected List<UnityAction<T>> _listeners = new List<UnityAction<T>>();
+
+        public virtual void Invoke(T arg)
         {
+            persistListener?.Invoke(arg);
+
             for (int i = 0, len = _listeners.Count; i < len; i++)
             {
-                if (_listeners[i]) _listeners[i].Response(arg);
+                _listeners[i]?.Invoke(arg);
             }
         }
 
-        public void AddListener(AbstractGameEventListener<T> listener)
+        public void AddListener(UnityAction<T> listener)
         {
             if (!_listeners.Contains(listener))
             {
@@ -23,7 +28,7 @@ namespace Kore.Events
             }
         }
 
-        public void RemoveListener(AbstractGameEventListener<T> listener)
+        public void RemoveListener(UnityAction<T> listener)
         {
             if (_listeners.Contains(listener))
             {

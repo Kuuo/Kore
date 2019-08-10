@@ -14,10 +14,10 @@ namespace Kore.Editor
             set => minimumSize = value;
         }
 
-        private Type parentType;
-        private List<Type> subTypes;
+        public Action<Type> onTypeSelected;
+
+        private AdvancedDropdownItem root;
         private Dictionary<string, Type> name2Type;
-        private Action<Type> onTypeSelected;
 
         protected SubTypesDropdown(AdvancedDropdownState state) : base(state)
         {
@@ -27,34 +27,33 @@ namespace Kore.Editor
         public SubTypesDropdown(Type parentType, Action<Type> onTypeSelectedCallback) :
             this(new AdvancedDropdownState())
         {
-            this.parentType = parentType;
-            subTypes = parentType.GetInstantiatableSubClasses();
+            root = new AdvancedDropdownItem(parentType.Name);
 
+            var subTypes = parentType.GetInstantiatableSubClasses();
             name2Type = new Dictionary<string, Type>();
-            foreach (var st in subTypes)
-            {
-                name2Type.Add(st.Name, st);
-            }
+
+            subTypes.ForEach(type => Add(type));
 
             onTypeSelected = onTypeSelectedCallback;
         }
 
+        public void Add(Type subType)
+        {
+            string typeName = subType?.Name ?? "None";
+
+            name2Type.Add(typeName, subType);
+            root.AddChild(new AdvancedDropdownItem(typeName));
+        }
+
         protected override AdvancedDropdownItem BuildRoot()
         {
-            var root = new AdvancedDropdownItem(parentType.Name);
-
-            foreach (var st in subTypes)
-            {
-                root.AddChild(new AdvancedDropdownItem(st.Name));
-            }
-
             return root;
         }
 
         protected override void ItemSelected(AdvancedDropdownItem item)
         {
             var type = name2Type[item.name];
-            onTypeSelected.Invoke(type);
+            onTypeSelected?.Invoke(type);
         }
     }
 }

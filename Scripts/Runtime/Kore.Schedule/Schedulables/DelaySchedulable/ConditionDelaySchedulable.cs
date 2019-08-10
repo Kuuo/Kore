@@ -12,7 +12,7 @@ namespace Kore.Schedule
 
         protected override IEnumerator ScheduleCoroutine()
         {
-            yield return new WaitUntil(() => !(target ^ condition.Satisfied));
+            yield return new WaitUntil(() => target == condition.Satisfied);
         }
     }
 }

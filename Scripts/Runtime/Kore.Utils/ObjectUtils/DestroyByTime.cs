@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Kore.Utils
 {
@@ -9,7 +7,7 @@ namespace Kore.Utils
     {
         public float time;
 
-        void Start()
+        private void Start()
         {
             Destroy(gameObject, time);
         }

@@ -4,7 +4,7 @@ using Kore.Events;
 namespace Kore.Variables
 {
     [CreateAssetMenu(menuName = "Kore/VariableAsset/Value/Int")]
-    public class IntAsset : ValueAsset<int>
+    public class IntAsset : NumberAsset<int>
     {
         [SerializeField]
         private IntGameEvent _onValueChangeEvent;
@@ -20,7 +20,5 @@ namespace Kore.Variables
         public void Add(IntAsset asset) => Value += asset.Value;
 
         public void Set(IntAsset asset) => Value = asset.Value;
-
-        public static implicit operator int(IntAsset v) => v.Value;
     }
 }

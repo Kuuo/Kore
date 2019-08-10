@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 namespace Kore.Events
@@ -6,17 +7,21 @@ namespace Kore.Events
     [CreateAssetMenu(menuName = "Kore/GameEvent/GameEvent")]
     public class GameEvent : ScriptableObject
     {
-        protected List<AbstractGameEventListener> listeners = new List<AbstractGameEventListener>();
+        public UnityEvent persistListener;
 
-        public void Raise()
+        protected List<UnityAction> listeners = new List<UnityAction>();
+
+        public virtual void Raise()
         {
+            persistListener?.Invoke();
+
             for (int i = 0, len = listeners.Count; i < len; i++)
             {
-                if (listeners[i]) listeners[i].Response();
+                listeners[i]?.Invoke();
             }
         }
 
-        public void AddListener(AbstractGameEventListener listener)
+        public void AddListener(UnityAction listener)
         {
             if (!listeners.Contains(listener))
             {
@@ -24,7 +29,7 @@ namespace Kore.Events
             }
         }
 
-        public void RemoveListener(AbstractGameEventListener listener)
+        public void RemoveListener(UnityAction listener)
         {
             if (listeners.Contains(listener))
             {

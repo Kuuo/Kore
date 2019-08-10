@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Kore.Schedule
@@ -7,6 +6,8 @@ namespace Kore.Schedule
     [AddComponentMenu("Kore/Schedule/Schedule Runner")]
     public class ScheduleRunner : Schedulable
     {
+        [UnityEngine.Serialization.FormerlySerializedAs("runDirectlyOnStart")]
+        public bool runOnStart;
         public int repeat = 1;
         public Schedulable[] schedule = new Schedulable[0];
 
@@ -19,13 +20,23 @@ namespace Kore.Schedule
         protected override IEnumerator ScheduleCoroutine()
         {
             round = 0;
+            int length = schedule.Length;
+
             while (ShouldRunning)
             {
-                for (int i = 0, length = schedule.Length; i < length; i++)
+                for (int i = 0; i < length; i++)
                 {
-                    yield return schedule[i].Run();
+                    if (schedule[i]) yield return schedule[i].RunCoroutine();
                 }
                 round++;
+            }
+        }
+
+        private void Start()
+        {
+            if (runOnStart)
+            {
+                RunDirectly();
             }
         }
     }

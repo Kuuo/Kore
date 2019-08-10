@@ -1,0 +1,6 @@
+using UnityEngine;
+using Kore;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+}
