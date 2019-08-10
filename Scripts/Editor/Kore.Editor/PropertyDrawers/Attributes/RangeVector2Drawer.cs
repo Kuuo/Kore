@@ -13,7 +13,7 @@ namespace Kore.Editor.PropertyDrawers
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return 38f;
+            return EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -42,11 +42,13 @@ namespace Kore.Editor.PropertyDrawers
 
         private void DoDraw(Rect position, GUIContent label)
         {
+            position.height = EditorGUIUtility.singleLineHeight;
             EditorGUI.MinMaxSlider(position, label, ref min, ref max, rangeAttribute.min, rangeAttribute.max);
-            position.height = 16f;
+
             EditorGUI.indentLevel++;
-            position.y += 22f;
-            EditorGUI.LabelField(position, $"Min: {min.ToString()}", $"Max: {max.ToString()}");
+            position.y += position.height + EditorGUIUtility.standardVerticalSpacing;
+
+            EditorGUI.LabelField(position, $"Min: {min}", $"Max: {max}");
             EditorGUI.indentLevel--;
         }
     }

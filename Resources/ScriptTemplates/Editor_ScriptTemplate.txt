@@ -1,0 +1,11 @@
+using UnityEngine;
+using UnityEditor;
+using Kore;
+
+namespace #NAMESPACE#
+{
+    [CustomEditor(typeof(#TARGET_TYPE#))]
+    public class #TARGET_TYPE#Editor : UnityEditor.Editor
+    {
+    }
+}

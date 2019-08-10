@@ -7,8 +7,8 @@ namespace Kore.Variables
 {
     public abstract class ValueReference<T> where T : struct
     {
-        [SerializeField] protected bool useLocalValue = true;
-        [SerializeField] protected T localValue;
+        public bool useLocalValue = true;
+        [SerializeField] protected T localValue = default;
         protected abstract ValueAsset<T> valueAsset { get; }
 
         public T Value

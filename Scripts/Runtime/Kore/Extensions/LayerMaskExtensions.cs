@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Kore
 {
-    public static class LayerMaskExtension
+    public static class LayerMaskExtensions
     {
         public static bool Contains(this LayerMask mask, int other)
         {

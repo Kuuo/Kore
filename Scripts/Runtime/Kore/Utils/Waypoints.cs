@@ -21,12 +21,14 @@ namespace Kore
 
         public Pose this[int index] => ((IReadOnlyList<Pose>)list)[index];
 
-        public IEnumerator<Pose> GetEnumerator()
+        public IEnumerator<Pose> Enumerator => ((IReadOnlyList<Pose>)list).GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IReadOnlyList<Pose>)list).GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator<Pose> GetEnumerator()
         {
             return ((IReadOnlyList<Pose>)list).GetEnumerator();
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -10,6 +11,7 @@ namespace Kore.Editor.PropertyDrawers
         {
             if (property.propertyType != SerializedPropertyType.String)
             {
+                EditorGUI.LabelField(position, "SceneNameAttribute ERROR", EditorStyles.boldLabel);
                 Debug.LogError("[SceneNameAttribute] can only be used at string field",
                                property.serializedObject.targetObject);
                 return;
@@ -29,10 +31,15 @@ namespace Kore.Editor.PropertyDrawers
 
             if (newIndex == -1)
             {
-                Debug.LogError($"Scene [{newScenePath}] is not in the build menu");
-                return;
+                var newList = new List<EditorBuildSettingsScene>(buildScenes);
+                newList.Add(new EditorBuildSettingsScene(newScenePath, true));
+                EditorBuildSettings.scenes = newList.ToArray();
+
+                newIndex = buildScenes.Length - 1;
+                Debug.Log($"Scene [{newScenePath}] has been added to the build settings");
             }
 
+            buildScenes[newIndex].enabled = true;
             property.stringValue = newScenePath;
         }
     }

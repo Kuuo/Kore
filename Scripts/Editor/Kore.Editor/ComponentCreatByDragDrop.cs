@@ -29,7 +29,9 @@ namespace Kore.Editor
 
                 var componentType = script.GetClass();
 
-                if (!componentType.IsSubclassOf(typeof(Component))) return;
+                if (componentType == null || componentType.IsAbstract ||
+                    !componentType.IsSubclassOf(typeof(Component)))
+                    return;
 
                 DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
 

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using Kore.Editor;
-using System;
 
 namespace Kore.Variables.Editor
 {
@@ -13,56 +11,32 @@ namespace Kore.Variables.Editor
     {
         private ReferenceAssetInitializer Target => target as ReferenceAssetInitializer;
 
-        private SerializedProperty configListProp;
+        public Type referenceType => Target.asset.GetType().BaseType.GenericTypeArguments[0];
 
-        private ReorderableList reorderableList;
+        private SerializedProperty propAsset;
+        private SerializedProperty propTarget;
 
-        private readonly string propNameDataList = nameof(ReferenceAssetInitializer.configList);
-        private readonly string propNameAsset = nameof(ReferenceAssetInitializer.InitConfig.asset);
-        private readonly string propNameTarget = nameof(ReferenceAssetInitializer.InitConfig.target);
-        private readonly float spaceBetweenField = 8f;
+        private readonly string propNameAsset = nameof(ReferenceAssetInitializer.asset);
+        private readonly string propNameTarget = nameof(ReferenceAssetInitializer.target);
 
         protected void OnEnable()
         {
-            configListProp = serializedObject.FindProperty(propNameDataList);
-
-            reorderableList = ReorderableListHelper.CreateSimple(serializedObject, configListProp)
-                                                   .OnHeader(DrawListHeaderCallBack)
-                                                   .OnDrawElement(DrawDataElementCallBack);
-        }
-
-        private void DrawListHeaderCallBack(Rect rect)
-        {
-            rect.x += 16f;
-            rect.width /= 2f;
-            EditorGUI.LabelField(rect, "Asset");
-
-            rect.x += rect.width;
-            EditorGUI.LabelField(rect, "Target");
-        }
-
-        private void DrawDataElementCallBack(Rect rect, int index, bool isActive, bool isFocused)
-        {
-            rect.y += 2;
-            rect.height -= 4;
-
-            var config = configListProp.GetArrayElementAtIndex(index);
-
-            var assetProp = config.FindPropertyRelative(propNameAsset);
-            var targetProp = config.FindPropertyRelative(propNameTarget);
-
-            rect.width = (rect.width - spaceBetweenField) / 2f;
-            EditorGUI.ObjectField(rect, assetProp, GUIContent.none);
-
-            rect.x += rect.width + spaceBetweenField;
-            EditorGUI.ObjectField(rect, targetProp, Target.configList[index].referenceType, GUIContent.none);
+            propAsset = serializedObject.FindProperty(propNameAsset);
+            propTarget = serializedObject.FindProperty(propNameTarget);
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            EditorGUILayout.Space();
-            reorderableList.DoLayoutList();
+
+            EditorGUILayout.PropertyField(propAsset);
+            serializedObject.ApplyModifiedProperties();
+
+            if (propAsset.objectReferenceValue)
+            {
+                propTarget.objectReferenceValue = EditorGUILayout.ObjectField(propTarget.displayName, propTarget.objectReferenceValue, referenceType, true);
+            }
+
             serializedObject.ApplyModifiedProperties();
         }
     }

@@ -156,7 +156,7 @@ namespace Kore.Editor
 
                 if (!inputComplete)
                 {
-                    EditorGUILayout.HelpBox("Macro Replace is not complete", MessageType.Warning);
+                    EditorGUILayout.HelpBox("Macro Replace is not complete", MessageType.Info);
                 }
                 else
                 {
@@ -178,7 +178,7 @@ namespace Kore.Editor
         {
             if (string.IsNullOrEmpty(scriptName))
             {
-                EditorGUILayout.HelpBox("Script Name is Empty", MessageType.Warning);
+                EditorGUILayout.HelpBox("Script Name is Empty", MessageType.Info);
                 return;
             }
             if (string.IsNullOrEmpty(selectionPath))
@@ -200,7 +200,7 @@ namespace Kore.Editor
             }
         }
 
-        [MenuItem("Kore/New Script/From Template")]
+        [MenuItem("Kore/New Script/From Template #&T")]
         private static void CreateWindow()
         {
             var window = GetWindow<ScriptCreatWindow>();

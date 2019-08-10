@@ -15,6 +15,9 @@ namespace Kore.Variables
             set { _onValueChangeEvent = value as FloatGameEvent; }
         }
 
+        public override int intValue { get => (int)Value; set => Value = (int)value; }
+        public override float floatValue { get => Value; set => Value = value; }
+
         public void Add(float amount) => Value += amount;
 
         public void Add(FloatAsset asset) => Value += asset.Value;
