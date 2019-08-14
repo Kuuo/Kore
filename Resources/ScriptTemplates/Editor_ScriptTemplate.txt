@@ -7,5 +7,15 @@ namespace #NAMESPACE#
     [CustomEditor(typeof(#TARGET_TYPE#))]
     public class #TARGET_TYPE#Editor : UnityEditor.Editor
     {
+        private void OnEnable()
+        {
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+            base.OnInspectorGUI();
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 }

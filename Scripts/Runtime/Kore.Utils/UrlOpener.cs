@@ -7,9 +7,15 @@ namespace Kore.Utils
     {
         public string url;
 
+        [ContextMenu("Open")]
         public void Open()
         {
             Open(url);
+        }
+
+        public void Open(Kore.Variables.StringAsset url)
+        {
+            Open(url.value);
         }
 
         public void Open(string url)

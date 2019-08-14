@@ -37,7 +37,8 @@ namespace Kore.Variables.Editor
             rect.height -= 4;
 
             var targetProp = propTargets.GetArrayElementAtIndex(index);
-            targetProp.objectReferenceValue = EditorGUI.ObjectField(rect, GUIContent.none, targetProp.objectReferenceValue, objType, true);
+            targetProp.objectReferenceValue =
+                EditorGUI.ObjectField(rect, GUIContent.none, targetProp.objectReferenceValue, objType, true);
         }
 
         public override void OnInspectorGUI()
@@ -48,6 +49,7 @@ namespace Kore.Variables.Editor
 
             if (propListAsset.objectReferenceValue)
             {
+                EditorGUILayout.Space();
                 reorderableList.DoLayoutList();
             }
 

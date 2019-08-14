@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -14,13 +13,13 @@ namespace Kore.Editor
         public List<string> templates;
         public List<MacroReplacePair> macroReplacePairs;
         public string currentTemplate;
-        public string scriptName;
+        public string finalScriptName;
 
         private ReorderableList templateList;
         private ReorderableList macroReplaceList;
 
-        private string selectionPath => PathUtils.GetCurrentSelectionPath();
-        private string destPath => Path.Combine(selectionPath, scriptName + ".cs");
+        private string selectionPath => PathUtil.GetCurrentSelectionDirectory();
+        private string destPath => Path.Combine(selectionPath, finalScriptName + ".cs");
 
         private const string ScriptTemplateFilter = "_ScriptTemplate";
         private const string EditorPrefKeyScriptCreat = "EditorPref-ScriptCreat";
@@ -49,13 +48,8 @@ namespace Kore.Editor
                                      .Select(id => AssetDatabase.GUIDToAssetPath(id))
                                      .ToList();
 
-            templateList = new ReorderableList(templates, typeof(string), false, true, false, false);
-            templateList.footerHeight = 1f;
-
-            templateList.drawHeaderCallback = (rect) =>
-            {
-                EditorGUI.LabelField(rect, "Script Templates");
-            };
+            templateList = new ReorderableList(templates, typeof(string), false, false, false, false);
+            templateList.headerHeight = 3f;
 
             templateList.onSelectCallback = OnSelectTemplate;
 
@@ -133,41 +127,43 @@ namespace Kore.Editor
 
             if (pair.Macro == "#SCRIPTNAME#")
             {
-                scriptName = pair.Replace;
+                finalScriptName = pair.Replace;
             }
         }
 
         private void OnGUI()
         {
-            EditorGUILayout.Space();
-            scriptName = EditorGUILayout.TextField("Script Name", scriptName);
-            EditorGUILayout.Space();
+            EditorGUILayout.BeginVertical(EditorStyles.inspectorFullWidthMargins);
+            GUILayout.Label("Choose Script Template:", EditorStyles.boldLabel);
+
+            var refreshRect = GUILayoutUtility.GetLastRect();
+            refreshRect.xMin = refreshRect.xMax - 100f;
+            DrawRefreshArea(refreshRect);
 
             templateList.DoLayoutList();
-            DrawRefreshArea();
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
 
             if (macroReplaceList != null)
             {
+                GUILayout.Label("Set macro replaces:", EditorStyles.boldLabel);
                 macroReplaceList.DoLayoutList();
 
                 bool inputComplete = !macroReplacePairs.Any(pair => string.IsNullOrEmpty(pair.Replace));
 
                 if (!inputComplete)
                 {
-                    EditorGUILayout.HelpBox("Macro Replace is not complete", MessageType.Info);
+                    EditorGUILayout.HelpBox("Macro replace is not complete", MessageType.Info);
                 }
                 else
                 {
                     DrawCreateArea();
                 }
             }
+            EditorGUILayout.EndVertical();
         }
 
-        private void DrawRefreshArea()
+        private void DrawRefreshArea(Rect rect)
         {
-            if (GUILayout.Button("Refresh Templates"))
+            if (GUI.Button(rect, "Refresh"))
             {
                 UpdateTemplateList();
                 Repaint();
@@ -176,7 +172,10 @@ namespace Kore.Editor
 
         private void DrawCreateArea()
         {
-            if (string.IsNullOrEmpty(scriptName))
+            finalScriptName = EditorGUILayout.TextField("Final Script Name", finalScriptName);
+            EditorGUILayout.Space();
+
+            if (string.IsNullOrEmpty(finalScriptName))
             {
                 EditorGUILayout.HelpBox("Script Name is Empty", MessageType.Info);
                 return;

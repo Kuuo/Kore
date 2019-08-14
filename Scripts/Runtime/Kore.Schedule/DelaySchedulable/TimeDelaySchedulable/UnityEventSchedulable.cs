@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedulables/Unity Event Schedulable")]
+    [AddComponentMenu("Kore/Schedule/Schedulables/UnityEventSchedulable")]
     public class UnityEventSchedulable : TimeDelaySchedulable
     {
         public UnityEvent Event;

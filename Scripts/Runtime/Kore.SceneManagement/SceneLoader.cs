@@ -6,15 +6,18 @@ namespace Kore.SceneManagement
     [AddComponentMenu("Kore/SceneManagement/SceneLoader")]
     public class SceneLoader : MonoBehaviour
     {
-        [SceneIndex] public int target;
+        public SceneReference target;
         public LoadSceneMode mode = LoadSceneMode.Single;
 
-        public void Load() => LoadAt(target);
-        public void ReloadActiveScene() => LoadAt(SceneManager.GetActiveScene().buildIndex);
-        private void LoadAt(int index) => SceneManager.LoadScene(index, mode);
+        public void Load() => Load(target.scenePath);
+        public void Load(SceneReference sceneReference) => Load(sceneReference.scenePath);
+        public void ReloadActiveScene() => Load(SceneManager.GetActiveScene().name);
+        private void Load(string sceneName, LoadSceneMode mode = LoadSceneMode.Single) =>
+            SceneManager.LoadScene(sceneName, mode);
 
-        public AsyncOperation LoadAsync() => LoadAtAsync(target);
-        public AsyncOperation ReloadActiveSceneAsync() => LoadAtAsync(SceneManager.GetActiveScene().buildIndex);
-        private AsyncOperation LoadAtAsync(int index) => SceneManager.LoadSceneAsync(index, mode);
+        public AsyncOperation LoadAsync() => LoadAsync(target.scenePath);
+        public AsyncOperation ReloadActiveSceneAsync() => LoadAsync(SceneManager.GetActiveScene().name);
+        private AsyncOperation LoadAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single) =>
+            SceneManager.LoadSceneAsync(sceneName, mode);
     }
 }

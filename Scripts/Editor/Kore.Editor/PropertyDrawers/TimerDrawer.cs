@@ -11,6 +11,7 @@ namespace Kore.Editor
         {
             var lengthProp = property.FindPropertyRelative(nameof(Timer.length));
 
+            label = EditorGUI.BeginProperty(position, label, property);
             EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(position, lengthProp, label);
 
@@ -18,6 +19,7 @@ namespace Kore.Editor
             {
                 lengthProp.serializedObject.ApplyModifiedProperties();
             }
+            EditorGUI.EndProperty();
         }
     }
 }

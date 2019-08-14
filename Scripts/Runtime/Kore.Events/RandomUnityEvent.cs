@@ -4,24 +4,23 @@ using UnityEngine.Events;
 namespace Kore.Events
 {
     [AddComponentMenu("Kore/Events/RandomUnityEvent")]
-    public class RandomUnityEvent : MonoBehaviour
+    public class RandomUnityEvent : UnityEventRaiser
     {
-        [SerializeField] private bool raiseOnAwake = true;
-        [SerializeField] private UnityEvent Event = new UnityEvent();
+        [Range(0, 1f)] public float chance = .5f;
 
-        private void Awake()
+        public override void Raise()
         {
-            if (raiseOnAwake)
+            if (Random.value <= chance)
             {
-                Raise();
+                base.Raise();
             }
         }
 
-        public virtual void Raise()
+        public override void DelayedRaise(float delay)
         {
-            if (Random.value > .5f)
+            if (Random.value <= chance)
             {
-                Event?.Invoke();
+                base.DelayedRaise(delay);
             }
         }
     }

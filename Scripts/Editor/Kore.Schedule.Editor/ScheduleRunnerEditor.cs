@@ -15,13 +15,18 @@ namespace Kore.Schedule.Editor
         private SerializedProperty scheduleProp;
 
         private ReorderableList reorderableList;
+        private SubTypesDropdown subTypesDropdown;
 
         private ScheduleRunner Target => target as ScheduleRunner;
+
+        private Transform holderTransform;
         private GameObject SchedulablesHolder
         {
             get
             {
-                var holderTransform = Target.transform.Find(ScheduleHolderName);
+                if (!holderTransform)
+                    holderTransform = Target.transform.Find(ScheduleHolderName);
+
                 if (!holderTransform)
                 {
                     holderTransform = (new GameObject(ScheduleHolderName)).transform;
@@ -29,6 +34,7 @@ namespace Kore.Schedule.Editor
                     holderTransform.localPosition = Vector3.zero;
                     holderTransform.localScale = Vector3.one;
                 }
+
                 return holderTransform.gameObject;
             }
         }
@@ -45,6 +51,9 @@ namespace Kore.Schedule.Editor
             reorderableList = ReorderableListHelper.CreateSimple(serializedObject, scheduleProp)
                                                    .OnAddDropdown(OnAddDropdownCallback)
                                                    .OnRemove(OnRemoveCallback);
+
+            subTypesDropdown = new SubTypesDropdown(typeof(Schedulable), AddSchedulable);
+            subTypesDropdown.Add(null);
         }
 
         public override void OnInspectorGUI()
@@ -61,37 +70,43 @@ namespace Kore.Schedule.Editor
 
             reorderableList.DoLayoutList();
             serializedObject.ApplyModifiedProperties();
+
+            if (EditorApplication.isPlaying)
+            {
+                if (GUILayout.Button("Run Schedule"))
+                {
+                    Target.RunDirectly();
+                }
+            }
         }
 
         private void OnAddDropdownCallback(Rect buttonRect, ReorderableList list)
         {
-            var dropdown = new SubTypesDropdown(typeof(Schedulable), AddSchedulable);
-
             buttonRect.xMin = buttonRect.xMax - DropdownWidth;
 
-            dropdown.Add(null);
-            dropdown.Show(buttonRect);
+            subTypesDropdown.Show(buttonRect);
         }
 
         private void AddSchedulable(Type schedulableType)
         {
             if (schedulableType == null)
             {
-                ArrayUtility.Add(ref Target.schedule, null);
+                scheduleProp.AddArrayElementNull();
                 return;
             }
 
             var newSchedulable = SchedulablesHolder.AddComponent(schedulableType) as Schedulable;
-            ArrayUtility.Add(ref Target.schedule, newSchedulable);
+            scheduleProp.AddArrayElement(newSchedulable);
         }
 
         private void OnRemoveCallback(ReorderableList list)
         {
             int index = list.index;
-            DestroyImmediate(Target.schedule[index]);
-            ArrayUtility.RemoveAt(ref Target.schedule, index);
+            DestroyImmediate(scheduleProp.GetArrayElementAtIndex(index).objectReferenceValue);
 
-            if (Target.schedule.Length == 0)
+            scheduleProp.DeleteArrayElementAtIndex(index);
+
+            if (scheduleProp.arraySize == 0)
             {
                 DestroyImmediate(SchedulablesHolder);
             }

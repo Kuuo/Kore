@@ -1,0 +1,14 @@
+using UnityEngine;
+using UnityEditor;
+using Kore;
+
+namespace #NAMESPACE#
+{
+    [CustomPropertyDrawer(typeof(#TARGET_TYPE#))]
+    public class #TARGET_TYPE#Drawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+        }
+    }
+}

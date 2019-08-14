@@ -3,7 +3,7 @@ using Kore.Variables;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedulables/Time Delay Schedulable")]
+    [AddComponentMenu("Kore/Schedule/Schedulables/TimeDelaySchedulable")]
     public class TimeDelaySchedulable : AbstractTimeDelaySchedulable
     {
         public FloatReference delay;

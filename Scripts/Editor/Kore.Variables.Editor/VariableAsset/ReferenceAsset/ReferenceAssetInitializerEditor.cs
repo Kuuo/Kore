@@ -29,15 +29,31 @@ namespace Kore.Variables.Editor
         {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(propAsset);
-            serializedObject.ApplyModifiedProperties();
-
-            if (propAsset.objectReferenceValue)
+            using (var checkScope = new EditorGUI.ChangeCheckScope())
             {
-                propTarget.objectReferenceValue = EditorGUILayout.ObjectField(propTarget.displayName, propTarget.objectReferenceValue, referenceType, true);
+                EditorGUILayout.PropertyField(propAsset);
+
+                if (checkScope.changed)
+                    serializedObject.ApplyModifiedProperties();
             }
 
-            serializedObject.ApplyModifiedProperties();
+            if (!propAsset.objectReferenceValue) return;
+
+            if (propTarget.objectReferenceValue && propTarget.objectReferenceValue.GetType() != referenceType)
+            {
+                propTarget.objectReferenceValue = null;
+                serializedObject.ApplyModifiedProperties();
+            }
+
+            using (var checkScope = new EditorGUI.ChangeCheckScope())
+            {
+                propTarget.objectReferenceValue =
+                    EditorGUILayout.ObjectField(
+                        propTarget.displayName, propTarget.objectReferenceValue, referenceType, true);
+
+                if (checkScope.changed)
+                    serializedObject.ApplyModifiedProperties();
+            }
         }
     }
 }

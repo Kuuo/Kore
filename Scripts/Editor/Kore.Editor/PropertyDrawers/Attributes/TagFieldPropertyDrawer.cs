@@ -17,12 +17,14 @@ namespace Kore.Editor.PropertyDrawers
                 return;
             }
 
+            label = EditorGUI.BeginProperty(position, label, property);
             if (string.IsNullOrEmpty(property.stringValue))
             {
                 property.stringValue = "Untagged";
             }
 
             property.stringValue = EditorGUI.TagField(position, label, property.stringValue);
+            EditorGUI.EndProperty();
         }
     }
 }

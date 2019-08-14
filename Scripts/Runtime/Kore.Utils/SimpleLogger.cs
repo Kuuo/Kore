@@ -9,19 +9,20 @@ namespace Kore.Utils
         private static ILogger logger = Debug.unityLogger;
 
         public LogType logType = LogType.Log;
+        public Color tagColor = Color.black;
+        public string tag = "SimpleLogger";
 
-        [TextArea]
-        public string tag = "<color=grey>SimpleLogger</color>";
+        private string coloredTag =>
+            $"<color=#{ColorUtility.ToHtmlStringRGB(tagColor)}>{tag}</color>";
 
+        public void Log(string message) => logger.Log(logType, coloredTag, message, this);
 
-        public void Log(string message) => logger.Log(logType, tag, message, this);
+        public void LogPlainObject(object obj) => Log(obj.ToString());
 
-        public void Log(object obj) => Log(obj.ToString());
-
-        public void Log(UnityObject obj) => Log(obj);
+        public void Log(UnityObject obj) => Log(obj.ToString());
 
         public void LogObjectName(UnityObject obj) => Log(obj.name);
 
-        public void Log(Transform transform) => Log(transform.position);
+        public void LogPosition(Transform transform) => LogPlainObject(transform.position);
     }
 }

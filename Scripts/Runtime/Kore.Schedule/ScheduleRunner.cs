@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedule Runner")]
+    [AddComponentMenu("Kore/Schedule/ScheduleRunner")]
     public class ScheduleRunner : Schedulable
     {
         [UnityEngine.Serialization.FormerlySerializedAs("runDirectlyOnStart")]

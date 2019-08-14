@@ -43,7 +43,7 @@ namespace Kore.Variables.Editor
         public static void Create(string nameSpace, string typeName)
         {
             string scriptFileName = typeName + "Asset.cs";
-            string currentSelectPath = PathUtils.GetCurrentSelectionPath();
+            string currentSelectPath = PathUtil.GetCurrentSelectionDirectory();
             string destPath = Path.Combine(currentSelectPath, scriptFileName);
 
             var creator = new ScriptCreator()

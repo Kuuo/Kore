@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Kore.Schedule
 {
-    [AddComponentMenu("Kore/Schedule/Schedulables/Condition Delay Schedulable")]
+    [AddComponentMenu("Kore/Schedule/Schedulables/ConditionDelaySchedulable")]
     public class ConditionDelaySchedulable : Schedulable
     {
         public ConditionCheck condition;
