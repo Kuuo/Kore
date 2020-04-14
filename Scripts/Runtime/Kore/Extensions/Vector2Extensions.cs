@@ -7,6 +7,16 @@ namespace Kore
     {
         public static float RandomRange(this Vector2 v) => Random.Range(v.x, v.y);
 
+        public static Vector2 With(this Vector2 v, float? x = null, float? y = null)
+        {
+            return new Vector2(x ?? v.x, y ?? v.y);
+        }
+
+        public static void SetWith(this Vector2 v, float? x = null, float? y = null)
+        {
+            v.Set(x ?? v.x, y ?? v.y);
+        }
+
         public static float SqrDistance(this Vector2 from, Vector2 to)
         {
             float dx = from.x - to.x;

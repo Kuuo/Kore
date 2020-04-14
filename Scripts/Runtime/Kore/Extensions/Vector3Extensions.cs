@@ -5,6 +5,16 @@ namespace Kore
 {
     public static class Vector3Extensions
     {
+        public static Vector3 With(this Vector3 v, float? x = null, float? y = null, float? z = null)
+        {
+            return new Vector3(x ?? v.x, y ?? v.y, z ?? v.z);
+        }
+
+        public static void SetWith(this Vector3 v, float? x = null, float? y = null, float? z = null)
+        {
+            v.Set(x ?? v.x, y ?? v.y, z ?? v.z);
+        }
+
         public static float SqrDistance(this Vector3 from, Vector3 to)
         {
             float dx = from.x - to.x;

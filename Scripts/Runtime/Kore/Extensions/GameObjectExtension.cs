@@ -15,11 +15,12 @@ namespace Kore
         public static T GetOrAddComponent<T>(this GameObject go)
             where T : Component
         {
-            var component = go.GetComponent<T>();
+            if (go.TryGetComponent<T>(out T component))
+            {
+                return component;
+            }
 
-            if (!component) component = go.AddComponent<T>();
-
-            return component;
+            return go.AddComponent<T>();
         }
 
         public static Component GetOrAddComponent(this GameObject go, Type type)
