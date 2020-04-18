@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 namespace Kore.Events
 {
     [CreateAssetMenu(menuName = "Kore/GameEvent/FloatGameEvent")]
     public class FloatGameEvent : GameEvent<float>
     {
-        public FloatUnityEvent persistResponse;
+        [SerializeField] protected FloatUnityEvent persistEvent = new FloatUnityEvent();
 
-        protected override UnityEvent<float> persistListener => persistResponse;
+        public override void Invoke(float arg)
+        {
+            persistEvent.Invoke(arg);
+            base.Invoke(arg);
+        }
     }
 }

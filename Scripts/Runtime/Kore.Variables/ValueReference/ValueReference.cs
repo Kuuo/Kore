@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Kore.Events;
 
 namespace Kore.Variables
 {
-    public abstract class ValueReference<T> where T : struct
+    public abstract class ValueReference<T, TValueAsset, TGameEvent>
+        where T : struct
+        where TValueAsset : ValueAsset<T, TGameEvent>
+        where TGameEvent : GameEvent<T>
     {
         public bool useLocalValue = true;
         [SerializeField] protected T localValue = default;
-        protected abstract ValueAsset<T> valueAsset { get; }
+        [SerializeField] protected TValueAsset valueAsset;
+
+        private EqualityComparer<T> equalityComparer => EqualityComparer<T>.Default;
 
         public T Value
         {
             get { return useLocalValue ? localValue : valueAsset.Value; }
             set
             {
-                if (value.Equals(Value)) return;
+                if (equalityComparer.Equals(value, Value)) return;
 
                 if (useLocalValue)
                 {
@@ -29,6 +33,6 @@ namespace Kore.Variables
             }
         }
 
-        public static implicit operator T(ValueReference<T> reference) => reference.Value;
+        public static implicit operator T(ValueReference<T, TValueAsset, TGameEvent> reference) => reference.Value;
     }
 }

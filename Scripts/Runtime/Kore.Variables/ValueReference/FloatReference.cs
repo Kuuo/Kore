@@ -1,13 +1,9 @@
-﻿using UnityEngine;
+﻿using Kore.Events;
 
 namespace Kore.Variables
 {
     [System.Serializable]
-    public class FloatReference : ValueReference<float>
+    public class FloatReference : ValueReference<float, FloatAsset, FloatGameEvent>
     {
-        [SerializeField]
-        protected FloatAsset asset;
-
-        protected override ValueAsset<float> valueAsset => asset;
     }
 }

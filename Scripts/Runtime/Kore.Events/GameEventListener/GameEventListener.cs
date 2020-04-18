@@ -4,11 +4,28 @@ using UnityEngine.Events;
 namespace Kore.Events
 {
     [AddComponentMenu("Kore/Events/Listeners/GameEventListener")]
-    public class GameEventListener : AbstractGameEventListener
+    public class GameEventListener : MonoBehaviour, IGameEventListener
     {
-        public UnityEvent eventHandle;
+        [SerializeField] private GameEvent listeningEvent;
+        [SerializeField] private UnityEvent eventHandle = new UnityEvent();
 
-        public override void Response()
+        protected virtual void OnEnable()
+        {
+            if (listeningEvent)
+            {
+                listeningEvent.AddListener(this);
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (listeningEvent)
+            {
+                listeningEvent.RemoveListener(this);
+            }
+        }
+
+        public virtual void Response()
         {
             eventHandle?.Invoke();
         }

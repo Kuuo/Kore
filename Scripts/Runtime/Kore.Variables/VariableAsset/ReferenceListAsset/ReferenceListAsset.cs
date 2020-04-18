@@ -6,29 +6,29 @@ namespace Kore.Variables
 {
     public abstract class ReferenceListAsset : ScriptableObject
     {
-        public abstract void Add(object obj);
+        public abstract void Add(Object obj);
+
+        public abstract bool Remove(Object obj);
 
         public abstract void Clear();
-
-        protected virtual void OnDisable() => Clear();
     }
 
-    public abstract class ReferenceListAsset<T> : ReferenceListAsset, IList<T>
+    public abstract class ReferenceListAsset<T> : ReferenceListAsset, IList<T>, ICollection<T>
         where T : class
     {
         [SerializeField] protected List<T> data = new List<T>();
 
-        public int Count => ((IList<T>)data).Count;
+        public int Count => data.Count;
 
-        public bool IsReadOnly => ((IList<T>)data).IsReadOnly;
+        public bool IsReadOnly => (data as IList<T>).IsReadOnly;
 
         public T this[int index]
         {
-            get => ((IList<T>)data)[index];
-            set => ((IList<T>)data)[index] = value;
+            get => data[index];
+            set => data[index] = value;
         }
 
-        public override void Add(object obj) => Add(obj as T);
+        public override void Add(Object obj) => Add(obj as T);
         public override void Clear() => data.Clear();
 
         public void Add(ReferenceListAsset<T> listAsset)
@@ -38,20 +38,23 @@ namespace Kore.Variables
 
         public void Add(T item) => data.Add(item);
 
-        public int IndexOf(T item) => ((IList<T>)data).IndexOf(item);
+        public override bool Remove(Object obj) => Remove(obj as T);
+        public bool Remove(T item) => data.Remove(item);
 
-        public void Insert(int index, T item) => ((IList<T>)data).Insert(index, item);
+        public int IndexOf(T item) => data.IndexOf(item);
 
-        public void RemoveAt(int index) => ((IList<T>)data).RemoveAt(index);
+        public void Insert(int index, T item) => data.Insert(index, item);
 
-        public bool Contains(T item) => ((IList<T>)data).Contains(item);
+        public void RemoveAt(int index) => data.RemoveAt(index);
 
-        public void CopyTo(T[] array, int arrayIndex) => ((IList<T>)data).CopyTo(array, arrayIndex);
+        public bool Contains(T item) => data.Contains(item);
 
-        bool ICollection<T>.Remove(T item) => ((IList<T>)data).Remove(item);
+        public void CopyTo(T[] array, int arrayIndex) => data.CopyTo(array, arrayIndex);
 
-        public IEnumerator<T> GetEnumerator() => ((IList<T>)data).GetEnumerator();
+        bool ICollection<T>.Remove(T item) => data.Remove(item);
 
-        IEnumerator IEnumerable.GetEnumerator() => ((IList<T>)data).GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => data.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => data.GetEnumerator();
     }
 }

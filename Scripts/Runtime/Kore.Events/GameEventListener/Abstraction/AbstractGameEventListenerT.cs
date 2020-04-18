@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Kore.Events
 {
-    public abstract class AbstractGameEventListener<T> : MonoBehaviour
+    public abstract class AbstractGameEventListener<T, TGameEvent>
+        : MonoBehaviour, IGameEventListener<T>
+        where TGameEvent : GameEvent<T>
     {
-        protected abstract GameEvent<T> listeningEvent { get; }
+        [SerializeField] private TGameEvent listeningEvent;
 
         protected virtual void OnEnable()
         {
             if (listeningEvent)
             {
-                listeningEvent.AddListener(Response);
+                listeningEvent.AddListener(this);
             }
         }
 
@@ -20,7 +20,7 @@ namespace Kore.Events
         {
             if (listeningEvent)
             {
-                listeningEvent.RemoveListener(Response);
+                listeningEvent.RemoveListener(this);
             }
         }
 

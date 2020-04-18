@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 namespace Kore.Events
 {
     [CreateAssetMenu(menuName = "Kore/GameEvent/IntGameEvent")]
     public class IntGameEvent : GameEvent<int>
     {
-        public IntUnityEvent persistResponse;
+        [SerializeField] protected IntUnityEvent persistEvent = new IntUnityEvent();
 
-        protected override UnityEvent<int> persistListener => persistResponse;
+        public override void Invoke(int arg)
+        {
+            persistEvent.Invoke(arg);
+            base.Invoke(arg);
+        }
     }
 }

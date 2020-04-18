@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Kore.Events;
 
 namespace Kore.Variables
 {
-    public abstract class NumberAsset<T> : ValueAsset<T>
+    public abstract class NumberAsset<T, TGameEvent> : ValueAsset<T, TGameEvent>
         where T : struct
+        where TGameEvent : GameEvent<T>
     {
-        public abstract int intValue { get; set; }
-        public abstract float floatValue { get; set; }
+        public abstract void Set(int newValue);
+        public abstract void Set(float newValue);
     }
 }

@@ -16,8 +16,6 @@ namespace Kore.Variables.Editor
             imagePosition = ImagePosition.ImageOnly
         };
 
-        protected virtual string GetAssetPropName() => "asset";
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             label = EditorGUI.BeginProperty(position, label, property);
@@ -28,7 +26,7 @@ namespace Kore.Variables.Editor
             // Get properties
             SerializedProperty useLocal = property.FindPropertyRelative("useLocalValue");
             SerializedProperty localValue = property.FindPropertyRelative("localValue");
-            SerializedProperty asset = property.FindPropertyRelative(GetAssetPropName());
+            SerializedProperty valueAsset = property.FindPropertyRelative("valueAsset");
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);
@@ -45,7 +43,7 @@ namespace Kore.Variables.Editor
             useLocal.boolValue = result == 0;
 
             EditorGUI.PropertyField(position,
-                useLocal.boolValue ? localValue : asset,
+                useLocal.boolValue ? localValue : valueAsset,
                 GUIContent.none);
 
             if (EditorGUI.EndChangeCheck())

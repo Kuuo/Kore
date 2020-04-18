@@ -1,13 +1,9 @@
-﻿using UnityEngine;
+﻿using Kore.Events;
 
 namespace Kore.Variables
 {
     [System.Serializable]
-    public class IntReference : ValueReference<int>
+    public class IntReference : ValueReference<int, IntAsset, IntGameEvent>
     {
-        [SerializeField]
-        protected IntAsset asset;
-
-        protected override ValueAsset<int> valueAsset => asset;
     }
 }

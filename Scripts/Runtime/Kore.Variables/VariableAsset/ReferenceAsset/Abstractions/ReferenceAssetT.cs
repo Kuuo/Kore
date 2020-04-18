@@ -1,10 +1,11 @@
-﻿namespace Kore.Variables
+﻿using UnityEngine;
+
+namespace Kore.Variables
 {
     public abstract class ReferenceAsset<T> : ReferenceAsset
         where T : class
     {
-        [UnityEngine.SerializeField]
-        protected T reference;
+        [SerializeField] protected T reference;
 
         public T Reference
         {
@@ -12,7 +13,8 @@
             set => reference = value;
         }
 
-        public override void Set(UnityEngine.Object obj) => Reference = obj as T;
+        public override void Set(Object obj) => Reference = obj as T;
+        public void Set(T obj) => Reference = obj;
 
         public override void Release() => reference = null;
 

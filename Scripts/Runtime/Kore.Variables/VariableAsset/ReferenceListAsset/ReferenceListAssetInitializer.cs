@@ -14,5 +14,10 @@ namespace Kore.Variables
         {
             System.Array.ForEach(targets, t => listAsset.Add(t));
         }
+
+        private void OnDestroy()
+        {
+            System.Array.ForEach(targets, t => listAsset.Remove(t));
+        }
     }
 }

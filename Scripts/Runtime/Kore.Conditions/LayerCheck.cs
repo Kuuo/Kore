@@ -12,19 +12,9 @@ namespace Kore.Conditions
             return Accept(go.layer);
         }
 
-        public bool Accept(Collision collision)
-        {
-            return Accept(collision.gameObject);
-        }
-
-        public bool Accept(Collision2D collision)
-        {
-            return Accept(collision.gameObject);
-        }
-
         public bool Accept(Component component)
         {
-            return Accept(component.gameObject);
+            return Accept(component.gameObject.layer);
         }
 
         public bool Accept(int layer)

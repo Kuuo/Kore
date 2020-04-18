@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kore.Utils
+namespace Kore.Utils.GizmoDrawers
 {
     public abstract class GizmoDrawer : MonoBehaviour
     {

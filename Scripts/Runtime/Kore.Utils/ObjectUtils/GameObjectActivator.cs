@@ -17,7 +17,7 @@ namespace Kore.Utils
 
         public void ReverseActiveState(GameObject gameObject)
         {
-            gameObject.SetActive(!gameObject.activeSelf);
+            gameObject.ReverseActiveState();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Kore
 
         public Timer(float length = 1f)
         {
-            this.length = new FloatReference { useLocalValue = true, Value = length };
+            this.length = new FloatReference { Value = length };
         }
 
         public void Tick() => Tick(Time.deltaTime);

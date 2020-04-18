@@ -1,19 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Kore;
+using Kore.Events;
 
-namespace Kore.Variables.UI
+namespace Kore.Variables.UIBinding
 {
-    public abstract class SliderValueAssetBinding<T> : MonoBehaviour
+    public abstract class SliderValueAssetBinding<T, TNumberAsset, TGameEvent> : MonoBehaviour
         where T : struct
+        where TNumberAsset : NumberAsset<T, TGameEvent>
+        where TGameEvent : GameEvent<T>
     {
+        public TNumberAsset numberAsset;
         public Slider slider;
-
-        protected abstract NumberAsset<T> _asset { get; }
 
         protected virtual void OnEnable()
         {
             slider.onValueChanged.AddListener(UpdateAssetValue);
+            UpdateAssetValue(slider.value);
         }
 
         protected virtual void OnDisable()
@@ -23,7 +25,7 @@ namespace Kore.Variables.UI
 
         protected void UpdateAssetValue(float newValue)
         {
-            _asset.floatValue = newValue;
+            numberAsset.Set(newValue);
         }
     }
 }

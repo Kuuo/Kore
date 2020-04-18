@@ -4,17 +4,7 @@ using Kore.Events;
 namespace Kore.Variables
 {
     [CreateAssetMenu(menuName = "Kore/VariableAsset/Value/Bool")]
-    public class BoolAsset : ValueAsset<bool>
+    public class BoolAsset : ValueAsset<bool, BoolGameEvent>
     {
-        [SerializeField]
-        private BoolGameEvent _onValueChangeEvent;
-
-        public override GameEvent<bool> OnValueChanged
-        {
-            get { return _onValueChangeEvent; }
-            set { _onValueChangeEvent = value as BoolGameEvent; }
-        }
-
-        public void Set(BoolAsset asset) => Value = asset.Value;
     }
 }

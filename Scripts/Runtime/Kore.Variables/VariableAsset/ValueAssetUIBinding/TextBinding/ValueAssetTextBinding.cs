@@ -1,24 +1,22 @@
 ﻿using TMPro;
 using Kore.Events;
+using UnityEngine.Events;
 
-namespace Kore.Variables.UI
+namespace Kore.Variables.UIBinding
 {
-    public abstract class ValueAssetTextBinding<TValue> : AbstractGameEventListener<TValue>
+    public abstract class ValueAssetTextBinding<TValue, TValueAsset, TGameEvent>
+        : ValueAssetUIBinding<TValue, TValueAsset, TGameEvent>
         where TValue : struct
+        where TValueAsset : ValueAsset<TValue, TGameEvent>
+        where TGameEvent: GameEvent<TValue>
     {
         public TMP_Text bindText;
         public string format = "G";
 
-        protected TValue value => valueAsset.Value;
-
-        protected abstract ValueAsset<TValue> valueAsset { get; }
-
-        protected override GameEvent<TValue> listeningEvent => valueAsset.OnValueChanged;
-
         protected override void OnEnable()
         {
-            SetText(value);
             base.OnEnable();
+            SetText(valueAsset.Value);
         }
 
         public virtual void SetText(TValue newValue)

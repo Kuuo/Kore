@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using Kore;
 
 namespace Kore.Editor
 {

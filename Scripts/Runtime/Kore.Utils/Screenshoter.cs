@@ -18,11 +18,13 @@ namespace Kore.Utils
 #endif
         public static void TakeShotToDesktop()
         {
+            string productName = Application.productName;
+            // TODO: Multi-platform consideration
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string sceneName = SceneManager.GetActiveScene().name;
             string time = DateTime.Now.ToString("yyyyMMddHHmmss");
 
-            string fileName = sceneName + "_" + time + ".png";
+            string fileName = $"{productName}_{sceneName}_{time}.png";
             string fullPath = Path.Combine(desktopPath, fileName);
             ScreenCapture.CaptureScreenshot(fullPath);
 

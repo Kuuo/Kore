@@ -7,7 +7,7 @@ namespace Kore.Utils
     {
         public string url;
 
-        [ContextMenu("Open")]
+        [ContextMenu("Open Url")]
         public void Open()
         {
             Open(url);

@@ -1,27 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
-using System.Collections.Generic;
 
 namespace Kore.Events
 {
     [CreateAssetMenu(menuName = "Kore/GameEvent/GameEvent")]
     public class GameEvent : ScriptableObject
     {
-        public UnityEvent persistListener;
+        [SerializeField] protected UnityEvent persistListener;
 
-        protected List<UnityAction> listeners = new List<UnityAction>();
+        protected readonly List<IGameEventListener> listeners = new List<IGameEventListener>();
 
         public virtual void Raise()
         {
             persistListener?.Invoke();
 
-            for (int i = 0, len = listeners.Count; i < len; i++)
+            for (int i = listeners.Count - 1; i >= 0; i--)
             {
-                listeners[i]?.Invoke();
+                try
+                {
+                    listeners[i].Response();
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.Log(ex);
+                }
             }
         }
 
-        public void AddListener(UnityAction listener)
+        public void AddListener(IGameEventListener listener)
         {
             if (!listeners.Contains(listener))
             {
@@ -29,7 +36,7 @@ namespace Kore.Events
             }
         }
 
-        public void RemoveListener(UnityAction listener)
+        public void RemoveListener(IGameEventListener listener)
         {
             if (listeners.Contains(listener))
             {

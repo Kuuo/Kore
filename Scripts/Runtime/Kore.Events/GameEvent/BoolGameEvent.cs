@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 namespace Kore.Events
 {
     [CreateAssetMenu(menuName = "Kore/GameEvent/BoolGameEvent")]
     public class BoolGameEvent : GameEvent<bool>
     {
-        public BoolUnityEvent persistResponse;
+        [SerializeField] protected BoolUnityEvent persistEvent = new BoolUnityEvent();
 
-        protected override UnityEvent<bool> persistListener => persistResponse;
+        public override void Invoke(bool arg)
+        {
+            persistEvent.Invoke(arg);
+            base.Invoke(arg);
+        }
     }
 }

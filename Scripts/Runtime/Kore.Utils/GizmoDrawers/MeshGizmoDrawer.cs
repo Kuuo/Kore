@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kore.Utils
+namespace Kore.Utils.GizmoDrawers
 {
     [AddComponentMenu("Kore/Utils/GizmoDrawers/MeshGizmoDrawer")]
     public class MeshGizmoDrawer : GizmoDrawer

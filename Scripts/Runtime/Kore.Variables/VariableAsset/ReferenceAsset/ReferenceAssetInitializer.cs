@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Kore.Variables
 {
@@ -14,6 +11,11 @@ namespace Kore.Variables
         private void Awake()
         {
             asset.Set(target);
+        }
+
+        private void OnDestroy()
+        {
+            asset.Release();
         }
     }
 }

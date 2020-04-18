@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using UnityEngine;
+﻿using System.IO;
 using UnityEditor;
 using Kore.Editor;
 
@@ -47,8 +45,8 @@ namespace Kore.Variables.Editor
             string destPath = Path.Combine(currentSelectPath, scriptFileName);
 
             var creator = new ScriptCreator()
-                              .AddMacroReplace(nameSpaceContentHolder, nameSpace)
-                              .AddMacroReplace(referenceTypeContentHolder, typeName);
+                          .AddMacroReplace(nameSpaceContentHolder, nameSpace)
+                          .AddMacroReplace(referenceTypeContentHolder, typeName);
 
             creator.Create(templatePath, destPath);
         }

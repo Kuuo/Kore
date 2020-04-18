@@ -1,13 +1,9 @@
-﻿using UnityEngine;
+﻿using Kore.Events;
 
 namespace Kore.Variables
 {
     [System.Serializable]
-    public class BoolReference : ValueReference<bool>
+    public class BoolReference : ValueReference<bool, BoolAsset, BoolGameEvent>
     {
-        [SerializeField]
-        protected BoolAsset asset;
-
-        protected override ValueAsset<bool> valueAsset => asset;
     }
 }

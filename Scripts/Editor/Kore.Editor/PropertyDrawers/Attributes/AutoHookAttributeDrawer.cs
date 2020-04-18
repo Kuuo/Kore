@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEditor;
-using Kore;
 
 namespace Kore.Editor
 {
+    // TODO: Update feature ?
     [CustomPropertyDrawer(typeof(AutoHookAttribute))]
     public class AutoHookAttributeDrawer : PropertyDrawer
     {

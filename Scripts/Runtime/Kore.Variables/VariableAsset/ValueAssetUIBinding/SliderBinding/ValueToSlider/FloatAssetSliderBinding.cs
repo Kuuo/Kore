@@ -2,22 +2,19 @@
 using UnityEngine.UI;
 using Kore.Events;
 
-namespace Kore.Variables.UI
+namespace Kore.Variables.UIBinding
 {
-    [AddComponentMenu("Kore/UI/SliderBinding/FloatAssetSliderBinding")]
-    public class FloatAssetSliderBinding : AbstractGameEventListener<float>
+    [AddComponentMenu("Kore/ValueAssetUIBinding/Slider/ValueToSlider/FloatAssetSliderBinding")]
+    public class FloatAssetSliderBinding : ValueAssetUIBinding<float, FloatAsset, FloatGameEvent>
     {
         public Slider slider;
-        public FloatAsset value;
         public FloatReference minValue;
         public FloatReference maxValue;
-
-        protected override GameEvent<float> listeningEvent => value.OnValueChanged;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            UpdateSlider(value);
+            UpdateSlider(valueAsset.Value);
         }
 
         public void UpdateSlider(float newValue)
